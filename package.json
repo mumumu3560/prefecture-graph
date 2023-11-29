@@ -11,13 +11,15 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}' && next lint --fix"
   },
   "dependencies": {
+    "@t3-oss/env-nextjs": "^0.7.1",
     "@types/jest": "^29.5.10",
     "axios": "^1.6.2",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
     "react-query": "^3.39.3",
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
