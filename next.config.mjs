@@ -2,6 +2,6 @@ import "./src/env/client.mjs";
 import "./src/env/server.mjs";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
-module.exports = nextConfig
+export default nextConfig;
