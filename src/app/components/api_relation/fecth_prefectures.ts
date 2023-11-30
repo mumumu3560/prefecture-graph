@@ -1,6 +1,33 @@
-/*npm install react-query axios */
 import axios from "axios";
 import { env } from '@/env/server.mjs';
+
+//RESAS APIのデータ元
+//https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
+
+const fetchPrefectures = async () => {
+    try {
+        const results = await axios.get<{ message: null; result: { prefCode: number; prefName: string }[] }>(
+            env.PREFECTURES_API_URL,
+            {
+                headers: { "X-API-KEY": env.API_KEY },
+            }
+        );
+
+        const formattedData = results.data.result.map((prefecture: { prefCode: number; prefName: string }) => ({
+            prefCode: prefecture.prefCode,
+            prefName: prefecture.prefName,
+        }));
+
+        console.log("Prefectures:", formattedData);
+        return formattedData;
+    } catch (error) {
+        console.error("Error fetching prefectures:", error);
+        throw error; // You can choose to handle or rethrow the error
+    }
+};
+
+export { fetchPrefectures };
+
 
 /*
 server componentsでapi取得 
@@ -19,21 +46,3 @@ https://env.t3.gg/docs/nextjs
 .mjsとは？？
 https://zenn.dev/kibe/articles/78205d43d4ec05
 */
-
-axios
-      .get<{ message: null; result: { prefCode: number; prefName: string }[] }>(
-        env.API_URL,
-        {
-          headers: { "X-API-KEY": env.API_KEY },
-        }
-      )
-      .then((results) => {
-        const formattedData = results.data.result.map((prefecture: { prefCode: number; prefName: string }) => ({
-          prefCode: prefecture.prefCode,
-          prefName: prefecture.prefName,
-        }));
-        console.log("Prefectures:", formattedData);
-      })
-      .catch((error) => {
-        console.error("Error fetching prefectures:", error);
-      });
