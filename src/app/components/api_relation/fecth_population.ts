@@ -1,5 +1,5 @@
 import axios from "axios";
-import { env } from '@/env/server.mjs';
+import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
 //https://opendata.resas-portal.go.jp/docs/api/v1/population/composition/perYear.html
@@ -22,13 +22,14 @@ interface PopulationResult {
 
 const fetchPopulation = async (prefCode: number): Promise<PopulationResult> => {
   try {
-    const results = await axios.get<{ message: null; result: PopulationResult }>(
-      `${env.POPULATION_API_URL}${prefCode}`,
-      {
-        headers: { "X-API-KEY": env.API_KEY },
-      }
-    );
+    const results = await axios.get<{
+      message: null;
+      result: PopulationResult;
+    }>(`${env.POPULATION_API_URL}${prefCode}`, {
+      headers: { "X-API-KEY": env.API_KEY },
+    });
 
+    //resultにはmessage:nullがあるのでそれは除外
     const formattedData: PopulationResult = {
       boundaryYear: results.data.result.boundaryYear,
       data: results.data.result.data.map((category: PopulationCategory) => ({
