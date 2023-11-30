@@ -6,7 +6,8 @@ export const env = createEnv({
    server: {
     API_KEY: z.string(),
     // urlかをバリデーションする
-    API_URL: z.string().url(),
+    PREFECTURES_API_URL: z.string().url(),
+    POPULATION_API_URL: z.string().url(),
    },
    // envファイルと紐づける
    experimental__runtimeEnv: {},
