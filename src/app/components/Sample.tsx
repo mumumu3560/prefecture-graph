@@ -1,9 +1,5 @@
 const Sample = () => {
-    return (
-        <div>
-            Enter
-        </div>
-    );
-}
+  return <div>Enter</div>;
+};
 
 export default Sample;
