@@ -1,0 +1,32 @@
+/* page.module.css */
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+  
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.checkbox {
+    display: none;
+}
+  
+.checkboxCustom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    margin-right: 8px;
+    background-color: transparent;
+    transition: background-color 0.3s;
+}
+  
+.checkbox:checked + .checkboxCustom {
+    background-color: #aaf0e8; /* Light blue when checked */
+}
+  
