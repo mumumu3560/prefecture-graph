@@ -10,5 +10,5 @@ export const env = createEnv({
     POPULATION_API_URL: z.string().url(),
    },
    // envファイルと紐づける
-   experimental__runtimeEnv: {},
+   experimental__runtimeEnv: process.env,
 })
