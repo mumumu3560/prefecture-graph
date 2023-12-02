@@ -10,7 +10,8 @@ export const env = createEnv({
     POPULATION_API_URL: z.string().url(),
    },
    // envファイルと紐づける
-   experimental__runtimeEnv:{
+   //invalid URLと出た。
+   runtimeEnv:{
         API_KEY: "API_KEY",
         PREFECTURES_API_URL: "PREFECTURES_API_URL",
         POPULATION_API_URL: "POPULATION_API_URL",
