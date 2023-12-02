@@ -11,6 +11,7 @@ export const env = createEnv({
    },
    // envファイルと紐づける
    //invalid URLと出た。
+   
    runtimeEnv:{
         API_KEY: process.env.API_KEY,
         PREFECTURES_API_URL: process.env.PREFECTURES_API_URL,
