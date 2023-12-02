@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { CheckBoxLogic } from './CheckBox_logic';
+import styles from './CheckBox.module.css';
 
 interface CheckboxProps {
   prefCode: number;
@@ -20,10 +21,15 @@ const Checkbox: React.FC<CheckboxProps> = ({ prefCode, prefName, selectedPrefect
   };
 
   return (
-    <label>
-      <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-      {prefName}
-    </label>
+
+    
+    <div className={`${styles.checkboxContainer} ${isChecked ? styles.checked : ''}`}>
+      <label>
+        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        {prefName}
+      </label>
+    </div>
+    
   );
 };
 
