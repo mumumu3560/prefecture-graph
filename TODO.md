@@ -24,5 +24,6 @@ runtimeEnv:{
 としても駄目だった。        
 というか.env.localはgithubにないのでCloudflareが認識できないのは当然だ。
 本番環境ではどうすればいいんだ？        
-wranglerの方でやればよさそうだが        
-できれば.env.local
+↓       
+Cloudflare Pagesの設定で以下の部分で環境変数を追加するとprocess.env.[variables]でアクセス可能       
+![Alt text](image.png)
