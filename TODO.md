@@ -26,4 +26,14 @@ runtimeEnv:{
 本番環境ではどうすればいいんだ？        
 ↓       
 Cloudflare Pagesの設定で以下の部分で環境変数を追加するとprocess.env.[variables]でアクセス可能       
+
 ![Alt text](image.png)
+
+#### checkBoxの当たり判定
+これを参考にしてみる
+https://quartet-communications.com/info/topics/7165
+
+#### testの書き方
+CheckBoxを作ったのでちゃんと動くかのテストを書く。
+fireEvent→userEventにしたほうがいい？まだテストについて良くわかっていない部分があるので
+勉強の必要がある。余裕のある時に。
