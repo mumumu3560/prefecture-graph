@@ -11,4 +11,5 @@
     border: 2px solid #aaa; /* 任意の枠線のスタイルと色を指定 */
     margin: 5px; /* 任意のマージンを指定 */
     padding: 8px; /* 任意のパディングを指定 */
+    font-size: 16px; /* 任意のフォントサイズを指定 */
   }
