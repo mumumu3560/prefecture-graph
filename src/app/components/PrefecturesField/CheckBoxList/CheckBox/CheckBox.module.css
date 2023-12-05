@@ -1,15 +1,14 @@
 /*チェックボックスがチェックされたときに背景色を変える*/
-.checked{
-    background-color: #aaf0e8;
+.checked {
+  background-color: #aaf0e8;
 }
-
 
 /*チェックボックスのスタイル*/
 .checkboxContainer {
-    display: inline-block; /* チェックボックスを囲むコンテナをインラインブロック要素に設定 */
-    border-radius: 8px; /* 任意の角丸の半径を指定 */
-    border: 2px solid #aaa; /* 任意の枠線のスタイルと色を指定 */
-    margin: 5px; /* 任意のマージンを指定 */
-    padding: 8px; /* 任意のパディングを指定 */
-    font-size: 16px; /* 任意のフォントサイズを指定 */
-  }
+  display: inline-block; /* チェックボックスを囲むコンテナをインラインブロック要素に設定 */
+  border-radius: 8px; /* 任意の角丸の半径を指定 */
+  border: 2px solid #aaa; /* 任意の枠線のスタイルと色を指定 */
+  margin: 4px; /* 任意のマージンを指定 */
+  padding: 4px; /* 任意のパディングを指定 */
+  font-size: 16px; /* 任意のフォントサイズを指定 */
+}
