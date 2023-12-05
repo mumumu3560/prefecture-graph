@@ -65,6 +65,14 @@ ChatGPTを使ってCheckBoxListを作成したが問題がある。
 
 ### 12/05 
 
+#### Github ActionsでのPrettierによるformatとESLintによる解析
+最初にやっておくべきだったがこれはGithub Actionsでやるべきだった
+github action format nextで検索
+https://zenn.dev/bloomer/articles/c48eff0e4b2b10
+https://deku.posstree.com/react/github-actions/prettier-eslint/
+t3のenv周りでエラーが出るがどうすればいい？よくわからない。沼りそうなので余裕のある時に
+
+
 #### HighChartsでグラフを表示する
 https://zenn.dev/itch/articles/9aa61eb25d43a6
 https://zenn.dev/shimapon3/articles/13e3d4b147742c
