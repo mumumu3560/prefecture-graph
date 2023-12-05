@@ -5,19 +5,18 @@ on:
     branches: [ work ]
 
 jobs:
-  format-and-lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: 20
+      
+        
+      - name: Install dependencies
+        run: npm ci
 
-      - name: format and lint
-        run: |
-          npm install
-          npm run prettier
-          npm run lint
+      - name: Prettier
+        run: npm run format
+      - name: ESLint
+        run: npm run lint
