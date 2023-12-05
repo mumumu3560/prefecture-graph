@@ -11,4 +11,5 @@
   margin: 4px; /* 任意のマージンを指定 */
   padding: 4px; /* 任意のパディングを指定 */
   font-size: 16px; /* 任意のフォントサイズを指定 */
+  cursor: pointer;
 }
