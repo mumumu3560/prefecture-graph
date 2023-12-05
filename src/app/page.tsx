@@ -19,11 +19,14 @@ export default async function Home() {
 
   return (
     <main className={styles.main}>
-      <PrefecturesField
-        key={1}
-        prefectures={prefectures}
-        selectedPrefectures={addedPrefectures}
-      />
+      <h1 className={styles.title}>都道府県別人口推移グラフ</h1>
+      <div>
+        <PrefecturesField
+          key={1}
+          prefectures={prefectures}
+          selectedPrefectures={addedPrefectures}
+        />
+      </div>
     </main>
   );
 }
