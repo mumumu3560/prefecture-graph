@@ -24,20 +24,17 @@ const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   return (
-    <div
-      className={`${styles.checkboxContainer} ${
-        isChecked ? styles.checked : ""
-      }`}
-    >
-      <label>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        {prefName}
-      </label>
-    </div>
+
+    <label className={`${styles.checkboxContainer} 
+    ${isChecked ? styles.checked : ""}`}>
+      <input
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
+      {prefName}
+    </label>
+
   );
 };
 
