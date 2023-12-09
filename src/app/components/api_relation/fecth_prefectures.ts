@@ -20,10 +20,6 @@ const fetchPrefectures = async () => {
       }),
     );
 
-    //console.log("ここは前");
-    //console.log("Prefectures:", formattedData);
-    //console.log("ここは後");
-
     return formattedData;
   } catch (error) {
     console.error("Error fetching prefectures:", error);
