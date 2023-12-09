@@ -24,17 +24,13 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
   console.log("ccccccccccccccccccccccccccccc");
 
   const cookieStore = cookies();
-  const isAfter = decodeURIComponent(cookieStore.get("isAfterRemove")?.value ?? "");
-  let count: number = 1;
-  console.log("isAfter: " + isAfter);
-  if(isAfter === "true"){
-    count++;
-  }
-  else{
-    count--;
-  }
+  //const isAfter = decodeURIComponent(cookieStore.get("isAfterRemove")?.value ?? "");
+  const cookieData = decodeURIComponent(cookieStore.get("prefName")?.value ?? "");
 
   const populationData = await CookieGet();
+
+
+  
 
   //ここには地域ごとの都道府県の数を入れる。
   const eachPrefecturesNum: number[] = [7, 7, 9, 7, 5, 4, 8];
@@ -90,6 +86,7 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
         key={prefecture.prefCode}
         prefCode={prefecture.prefCode}
         prefName={prefecture.prefName}
+        cookieData={cookieData}
       />
     ));
   };
@@ -100,7 +97,8 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
     <div>
       <div className={styles.container}>{renderCheckboxByArea()}</div>
       <CookieSave 
-        receivedData={populationData} isAfterRemove={isAfter} checkCounter={count}
+        receivedData={populationData} 
+        prefData = {cookieData}
       >
 
       </CookieSave>
