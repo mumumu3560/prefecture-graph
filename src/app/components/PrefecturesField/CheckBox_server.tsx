@@ -1,3 +1,4 @@
+/*
 import { cookies } from "next/headers";
 import { fetchPopulation } from "@/app/components/api_relation/fecth_population";
 
@@ -31,3 +32,4 @@ export  async function CookieGet(): Promise<PopulationResult> {
   return populationResult2;
 
 }
+*/
