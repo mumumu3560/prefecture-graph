@@ -74,7 +74,7 @@ const CookieSave: React.FC<CheckboxProps> = ({
   }
   else{
     console.log("receivedData is not null");
-    const addingData:PopulationResult = receivedData;
+    const addingData:PopulationResult = receivedData!;
     addPrefecture(addingData);
     //console.log(populationData.length);
   }
