@@ -7,6 +7,8 @@ import React from 'react'
 import Chart from "./components/Recharts/Recharts_view";
 //import { fetchPopulation } from "./components/api_relation/fecth_population";
 
+export const runtime = 'edge';
+
 interface Prefecture {
   prefCode: number;
   prefName: string;

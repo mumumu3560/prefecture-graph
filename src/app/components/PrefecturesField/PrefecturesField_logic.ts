@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { fetchPopulation } from "@/app/components/api_relation/fecth_population";
 
+export const runtime = 'edge';
 
 interface PopulationData {
     year: number;
@@ -19,7 +20,7 @@ interface PopulationData {
     data: PopulationCategory[];
   }
 
-  
+
 export async function CookieGet(): Promise<PopulationResult | null> {
 
     console.log("CookieGet is called");
