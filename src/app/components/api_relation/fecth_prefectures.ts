@@ -1,8 +1,41 @@
-import axios from "axios";
+//import axios from "axios";
 import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
 //https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
+interface Prefecture {
+  prefCode: number;
+  prefName: string;
+}
+
+const fetchPrefectures = async (): Promise<Prefecture[]> => {
+  try {
+    const response = await fetch(env.PREFECTURES_API_URL, {
+      headers: { "X-API-KEY": env.API_KEY },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch prefectures: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    const formattedData: Prefecture[] = result.result.map((prefecture: { prefCode: number; prefName: string }) => ({
+      prefCode: prefecture.prefCode,
+      prefName: prefecture.prefName,
+    }));
+
+    return formattedData;
+  } catch (error) {
+    console.error("Error fetching prefectures:", error);
+    throw error;
+  }
+};
+
+export { fetchPrefectures };
+
+
+/*
 
 const fetchPrefectures = async () => {
   try {
@@ -28,6 +61,7 @@ const fetchPrefectures = async () => {
 };
 
 export { fetchPrefectures };
+*/
 
 /*
 server componentsでapi取得 
