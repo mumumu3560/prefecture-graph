@@ -70,10 +70,7 @@ export const usePrefStore = create<prefState>()(
 
         addPrefPopulationData: (data: PopulationResult) => 
           set((state) => {
-            if(state.prefPopulationData == null){
-              console.log("state.prefPopulationData is null");
-              return { prefPopulationData: [data], isAfterRemove: false };
-            }
+
             const isPrefNameExist = state.prefPopulationData.some(prefData => prefData.prefName === data.prefName);
             console.log("state.prefPopulationData:", state.prefPopulationData);
                     
