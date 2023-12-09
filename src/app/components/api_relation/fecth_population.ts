@@ -16,7 +16,14 @@ interface PopulationResult {
   data: PopulationCategory[];
 }
 
-const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult> => {
+const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult | null> => {
+
+  console.log("fetchPopulation is called");
+  console.log("prefCode:", prefCode);
+  console.log("prefName:", prefName);
+  if(isNaN(prefCode) || prefName == ""){
+    return null;
+  }
   try {
     const response = await fetch(`${env.POPULATION_API_URL}${prefCode}`, {
       headers: { "X-API-KEY": env.API_KEY },
