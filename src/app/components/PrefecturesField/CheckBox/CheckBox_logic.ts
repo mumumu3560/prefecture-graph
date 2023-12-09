@@ -1,14 +1,19 @@
-export function CheckBoxLogic(
+/*
+"use client";
+
+import { useRouter } from "next/navigation";
+
+export function CookieRequest(
   prefCode: number,
-  isChecked: boolean,
-  selectedPrefectures: number[],
-): void {
-  if (isChecked) {
-    console.log("チェックされました");
-    selectedPrefectures.push(prefCode);
-  } else {
-    console.log("チェックが外されました");
-    const index = selectedPrefectures.indexOf(prefCode);
-    selectedPrefectures.splice(index, 1);
-  }
+  prefName: string,
+): void{
+  const router = useRouter();
+
+  document.cookie = `prefCode=${encodeURIComponent(prefCode)}`;
+  document.cookie = `prefName=${encodeURIComponent(prefName)}`;
+  
+  router.refresh();
+
 }
+
+*/
