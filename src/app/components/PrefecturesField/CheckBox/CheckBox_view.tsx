@@ -11,6 +11,7 @@ interface CheckboxProps {
   prefName: string;
 }
 
+/*
 interface PopulationData {
   year: number;
   value: number;
@@ -27,6 +28,7 @@ interface PopulationResult {
   prefName: string;
   data: PopulationCategory[];
 }
+*/
 
 
 
@@ -47,7 +49,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   //具体的な処理を書く
   const handleCheckboxChange = async () => {
-document.cookie = 'isAfterRemove=true';
+    document.cookie = 'isAfterRemove=true';
     console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbb");
 
     if(isChecked){

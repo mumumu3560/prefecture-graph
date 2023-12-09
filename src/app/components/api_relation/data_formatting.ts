@@ -1,3 +1,4 @@
+/*
 interface PopulationData {
   year: number;
   value: number;
@@ -20,3 +21,5 @@ interface ChartDataItem {
 }
 
 
+
+*/

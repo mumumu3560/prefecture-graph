@@ -1,6 +1,6 @@
 "use client";
 import {usePrefStore} from '@/app/global/store';
-import { useRouter } from "next/navigation";
+//import { useRouter } from "next/navigation";
 
 
 interface CheckboxProps {
@@ -48,7 +48,7 @@ const CookieSave: React.FC<CheckboxProps> = ({
 
   //再レンダリングされないようにするには？？
 
-  let shouldAddPrefecture:boolean = true;
+  const shouldAddPrefecture:boolean = true;
   //高々47回しか回らないので、O(n)でも問題ない
   
   /*

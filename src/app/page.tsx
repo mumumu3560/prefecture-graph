@@ -5,13 +5,14 @@ import PrefecturesField from "./components/PrefecturesField/PrefecturesField_vie
 import React from 'react'
 
 import Chart from "./components/Recharts/Recharts_view";
-import { fetchPopulation } from "./components/api_relation/fecth_population";
+//import { fetchPopulation } from "./components/api_relation/fecth_population";
 
 interface Prefecture {
   prefCode: number;
   prefName: string;
 }
 
+/*
 interface PopulationData {
   year: number;
   value: number;
@@ -28,12 +29,13 @@ interface PopulationResult {
   prefName: string;
   data: PopulationCategory[];
 }
+*/
 
 // awaitを使うにはasyncをつける必要がある
 //https://zenn.dev/tfutada/articles/36ad71ab598019
 export default async function Home() {
   const prefectures: Prefecture[] = await fetchPrefectures();
-  const populationResult: PopulationResult = await fetchPopulation(1, "北海道");
+  //const populationResult: PopulationResult = await fetchPopulation(1, "北海道");
 
 
   /*
