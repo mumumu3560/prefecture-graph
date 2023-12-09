@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 interface CheckboxProps {
   prefCode: number;
   prefName: string;
+  cookieData: string;
 }
 
 /*
@@ -35,15 +36,16 @@ interface PopulationResult {
 const Checkbox: React.FC<CheckboxProps> = ({
   prefCode,
   prefName,
+  cookieData
 }) => {
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(cookieData === prefName ? true :false);
+
 
   //分割代入とselectorの書き方がある。再描画されるのは分割代入の方らしい
   //https://reffect.co.jp/react/zustand#count-2
 
   const removePrefecture = usePrefStore((state) => state.removePrefPopulationData);
-  //const increment = usePrefStore((state) => state.incrementCounter);
 
   const router = useRouter();
 
@@ -56,6 +58,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
       //cookieの方でisAfterRemoveをtrueにする
       
       console.log("removePrefecture: " + prefName);
+      document.cookie = `prefCode=""`;
+      document.cookie = `prefName=""`;
       removePrefecture(prefName);
       console.log("ここがどうなっている");
       router.refresh();
