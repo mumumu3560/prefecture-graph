@@ -16,11 +16,11 @@ interface PopulationCategory {
 
 //boundaryYearは2020でこれ以上は推定値
 interface PopulationResult {
-  boundaryYear: number;
+  prefName: string;
   data: PopulationCategory[];
 }
 
-const fetchPopulation = async (prefCode: number): Promise<PopulationResult> => {
+const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult> => {
   try {
     const results = await axios.get<{
       message: null;
@@ -31,18 +31,18 @@ const fetchPopulation = async (prefCode: number): Promise<PopulationResult> => {
 
     //resultにはmessage:nullがあるのでそれは除外
     const formattedData: PopulationResult = {
-      boundaryYear: results.data.result.boundaryYear,
+      prefName: prefName,
       data: results.data.result.data.map((category: PopulationCategory) => ({
         label: category.label,
         data: category.data.map((populationData: PopulationData) => ({
           year: populationData.year,
           value: populationData.value,
-          rate: populationData.rate || undefined,
+          rate: populationData.rate || -1,
         })),
       })),
     };
 
-    console.log("Formatted Data:", formattedData);
+    //console.log("Formatted Data:", formattedData);
     return formattedData;
   } catch (error) {
     console.error("Error fetching data:", error);
