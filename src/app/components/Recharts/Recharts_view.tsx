@@ -1,8 +1,26 @@
 "use client";
 
 import React from "react"; /*{ useState } */ 
-//import {usePrefStore} from '@/app/global/store';
+import {usePrefStore} from '@/app/global/store';
 //import { useRouter } from "next/navigation";
+
+
+interface PopulationData {
+  year: number;
+  value: number;
+  rate?: number;
+}
+
+interface PopulationCategory {
+  label: string;
+  data: PopulationData[];
+}
+
+interface PopulationResult {
+  prefName: string;
+  data: PopulationCategory[];
+}
+
 
 import {
   LineChart,
@@ -13,10 +31,6 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-
-//const data2:{year: number, prefectures:{prefecture: string, population: number}[] } []
-
-
 
 const data:{year: number, 北海道: number, 香川: number, amt: number}[] = [
   {
@@ -65,6 +79,11 @@ const data:{year: number, 北海道: number, 香川: number, amt: number}[] = [
 
 export default function App() {
   console.log("dddddddddddddddddd");
+
+  const prefPopulationData: PopulationResult[] = usePrefStore((state) => state.prefPopulationData);
+  console.log("prefPopulationData: " + prefPopulationData);
+  console.log("ここがrecharts");
+  console.log(prefPopulationData[0]);
 
   return (
     <div>
