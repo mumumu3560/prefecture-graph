@@ -129,3 +129,57 @@ We already have a closed issue related: https://github.com/highcharts/highcharts
 代わりにRechartsを使う？？
 
 #### Rechartsを使う。
+![Alt text](image-2.png)
+こういったデータを受け取っている。
+Rechartsの方では
+![Alt text](image-3.png)
+こうやってデータを受け取り表示する。
+
+
+data:{year: number, 北海道: number, 香川: number, amt: number}[]            
+↓       
+data:{year: number, 北海道: number, 香川: number, amt: number, 青森:number}[]
+のようなデータ変換が必要？よくわからない。これでやるならグラフの表示の前にデータ型を変更する？      
+const data2:{year: number, prefectures:{prefecture: string, population: number}[] } []
+にすればいいか？
+PopulationResult[]→data2にしたい、labelごとの振り分けもいる
+これだとデータの保存が面倒そう。        
+interface PopulationResult {
+  prefName: string;
+  data: PopulationCategory[];
+}
+
+これをそのままzustandに保存してデータを取り出すのは頑張る。
+
+難しくないか？？？      
+router.refresh()によって再描画される？どのサーバーコンポーネントが再描画される？ルート上の？
+https://www.commte.co.jp/learn-nextjs/useRouter
+
+どうやればいいのかわからないが、最初はCheckBoxの上にPrefectureがあるから        
+・CheckBoxでCookie更新
+→PrefectureでCookie取得してそれに基づいたデータフェッチ
+→CheckBoxにデータを渡してstoreの更新
+しようと思ったがそれではすべてのチェックボックスに値が渡されるので新しくファイルを作りそこで
+storeの更新を行う。addするときにはデータをフェッチする必要があるためその場合にのみ使う。
+
+Cookieはたまってしまう？のでページを開いたときに削除するようにしたい。
+こういうエラーが出る
+Unhandled Runtime Error
+Error: Hydration failed because the initial UI does not match what was rendered on the server.
+
+See more infco here: https://nextjs.org/docs/messages/react-hydration-error
+うまくいかないなぁ。やっぱりやり方が違うのか？レンダリングとかでもrouter.refreshは悪そうだしどうすれば？
+
+そもそも面倒(主観)になっているのはclient componentではセキュリティの関係上api token等を保存するのがよくない。→server componentsでデータを取得する必要がある。→client componentから操作を受け付ける必要がある。→流れが「client component→server component→client component」のようになってしまうと思っているから
+
+なにげなくpersist使っていたがこれがよくなかった
+https://qiita.com/s_taro/items/0c16f077d843ac1a78fa
+
+無限ループに入ってしまっていた。checkboxをチェックしたときにクッキーがrefreshされるのだがその時に親コンポーネントが再レンダリングされる。→prefecturesField_viewが再レンダリングされるとその子のCookieSave(client component)に処理が走るのだがここでaddprefectureが行われる→再レンダリング→親コンポーネントも再レンダリング→という無限ループだったらしい。
+
+CheckBox_viewでremove→親コンポーネント再レンダリング→cookieが残っている時にそのcookieに基づいてaddが行われてしまう。    
+削除の後cookieも削除する必要がある？
+
+router.refreshってどこが再レンダリングされるのだ？
+というよりzustandの方でselectされている要素が変更されると再レンダリングされることの方が
+影響が大きそう
