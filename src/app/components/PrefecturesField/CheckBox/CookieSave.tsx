@@ -5,8 +5,7 @@ import {usePrefStore} from '@/app/global/store';
 
 interface CheckboxProps {
   receivedData: PopulationResult | null;
-  isAfterRemove: string;
-  checkCounter: number;
+  prefData: string;
 }
 
 interface PopulationData {
@@ -28,8 +27,7 @@ interface PopulationResult {
 
 const CookieSave: React.FC<CheckboxProps> = ({
   receivedData,
-  isAfterRemove,
-  checkCounter
+  prefData
 }) => {
 
   /*
@@ -43,7 +41,6 @@ const CookieSave: React.FC<CheckboxProps> = ({
   const addPrefecture = usePrefStore((state) => state.addPrefPopulationData);
   //const populationData = usePrefStore((state) => state.prefPopulationData);
   console.log("gaghaegh:a");
-  console.log(checkCounter);
   console.log("goaehgh@gag");
 
   //再レンダリングされないようにするには？？
@@ -69,17 +66,18 @@ const CookieSave: React.FC<CheckboxProps> = ({
   */
   console.log("receivedData: " + receivedData?.prefName);
   console.log("shouldAddPrefecture: " + shouldAddPrefecture);
-  console.log("isAfterRemove: " + isAfterRemove);
 
   //counterは最初のみ
   //|| counter === 0
-  if(!receivedData  || !shouldAddPrefecture || isAfterRemove !== "false"){
+  if(!receivedData || prefData === ""){
     console.log("populationData is null");
   }
   else{
     addPrefecture(receivedData);
     //console.log(populationData.length);
   }
+
+  console.log(receivedData);
 
   console.log("populationData:Here");
   //ここで今までのpopulationDataを出力する
