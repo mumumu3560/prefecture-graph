@@ -1,4 +1,3 @@
-//import axios from "axios";
 import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
@@ -27,7 +26,6 @@ const fetchPrefectures = async (): Promise<Prefecture[]> => {
 
     return formattedData;
   } catch (error) {
-    console.error("Error fetching prefectures:", error);
     throw error;
   }
 };
