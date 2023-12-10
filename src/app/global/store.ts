@@ -32,11 +32,6 @@ interface prefState {
   addPrefPopulationData: (data: PopulationResult) => void
   removePrefPopulationData: (prefName: string) => void
 
-  counter: number
-  incrementCounter: () => void
-
-  isAfterRemove: boolean
-
 }
 
 
@@ -48,25 +43,7 @@ export const usePrefStore = create<prefState>()(
 
       (set) => ({
 
-        /*
-        prefArrays: [],
-        
-        addPref: (prefCode: number) => set((state) => ({ prefArrays: [...state.prefArrays, prefCode] })),
-        
-        removePref: (prefCode: number) =>
-          set((state) => ({ prefArrays: state.prefArrays.filter((pref) => pref !== prefCode) })),
-
-        */
-
         prefPopulationData: [],
-
-        /*
-        addPrefPopulationData: (data: PopulationResult) => 
-          set((state) => {
-            console.log('Adding population data:', data);
-            return { prefPopulationData: [...state.prefPopulationData, data] , isAfterRemove: false};
-          }),
-        */
 
         addPrefPopulationData: (data: PopulationResult) => 
           set((state) => {
@@ -76,36 +53,21 @@ export const usePrefStore = create<prefState>()(
                     
             if (isPrefNameExist) {
               console.log(`Population data for ${data.prefName} already exists. Skipping addition.`);
-              return { prefPopulationData: state.prefPopulationData, isAfterRemove: false };
+              return { prefPopulationData: state.prefPopulationData};
             }
         
             console.log('Adding population data:', data);
-            return { prefPopulationData: [...state.prefPopulationData, data], isAfterRemove: false };
+            return { prefPopulationData: [...state.prefPopulationData, data]};
           }),
-
-
         
 
-        /*
-        removePrefPopulationData: (prefName: string) =>
-          set((state) => (
-            { prefPopulationData: state.prefPopulationData.filter((pref) => pref.prefName !== prefName) }
-          )),
-        */
-
-          removePrefPopulationData: (prefName: string) => set((state) => {
-            console.log("Before removal:", state.prefPopulationData);
-            const newPrefPopulationData = state.prefPopulationData.filter((pref) => pref.prefName !== prefName);
-            console.log("After removal:", newPrefPopulationData);
-            console.log("isAfterRemove:", state.isAfterRemove);
-            return { prefPopulationData: newPrefPopulationData, isAfterRemove: true };
-          }),
+        removePrefPopulationData: (prefName: string) => set((state) => {
+          console.log("Before removal:", state.prefPopulationData);
+          const newPrefPopulationData = state.prefPopulationData.filter((pref) => pref.prefName !== prefName);
+          console.log("After removal:", newPrefPopulationData);
+          return { prefPopulationData: newPrefPopulationData};
+        }),
           
-
-        counter: 0,
-        incrementCounter: () => set((state) => ({ counter: state.counter + 1 })),
-
-        isAfterRemove: false,
       }),
 
       {
