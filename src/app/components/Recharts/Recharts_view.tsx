@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useState } from "react"; /*{ useState } */ 
+import React, { useState } from "react"; 
 import {usePrefStore} from '@/app/global/store';
-//import { useRouter } from "next/navigation";
 
 import { convertPrefectureData } from "./recharts_data_converting";
-
-/*
-*/
 
 interface PopulationData {
   year: number;
@@ -37,11 +33,12 @@ import {
 } from "recharts";
 
 export default function App() {
-  console.log("dddddddddddddddddd");
+
 
   const prefPopulationData: PopulationResult[] = usePrefStore((state) => state.prefPopulationData);
 
   const [activeGraph, setActiveGraph] = useState("総人口");
+
 
   const handleGraphChange = (graph: string) => {
     setActiveGraph(graph);

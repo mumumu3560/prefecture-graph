@@ -6,6 +6,8 @@ import CookieSave from "./CheckBox/CookieSave";
 
 import { cookies } from "next/headers";
 
+//export const runtime = 'edge';
+
 //都道府県コードと名前の保持
 interface Prefecture {
   prefCode: number;
@@ -17,17 +19,36 @@ interface CheckboxListProps {
   prefectures: Prefecture[];
 }
 
+interface PopulationData {
+  year: number;
+  value: number;
+  rate?: number;
+}
+
+interface PopulationCategory {
+  label: string;
+  data: PopulationData[];
+}
+
+//boundaryYearは2020でこれ以上は推定値
+interface PopulationResult {
+  prefName: string;
+  data: PopulationCategory[];
+}
+
 const CheckBoxList: React.FC<CheckboxListProps> = async ({
   prefectures,
 }) => {
 
-  console.log("ccccccccccccccccccccccccccccc");
+  //ここではCookieから取得したデータによって処理を変える。
+  //CheckBoxのチェックを付けたときにはprefNameが空文字でない
+  //CheckBoxのチェックを外したときにはprefNameが空文字
+  //CookieGetではprefNameが空文字でないときのみデータを取得する。
+  //CookieGetではprefNameが空文字のときはnullを返す。
 
   const cookieStore = cookies();
-  //const isAfter = decodeURIComponent(cookieStore.get("isAfterRemove")?.value ?? "");
-  const cookieData = decodeURIComponent(cookieStore.get("prefName")?.value ?? "");
-
-  const populationData = await CookieGet();
+  const cookieData: string = decodeURIComponent(cookieStore.get("prefName")?.value ?? "");
+  const populationData:PopulationResult|null  = await CookieGet();
 
 
   

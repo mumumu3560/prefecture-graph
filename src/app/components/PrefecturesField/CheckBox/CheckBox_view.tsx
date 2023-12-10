@@ -3,35 +3,17 @@
 import React, { useState } from "react";
 import styles from "./CheckBox.module.css";
 import {usePrefStore} from '@/app/global/store';
+//import {usePrefStore} from '../../../../app/global/store';
 import { useRouter } from "next/navigation";
 
 
 interface CheckboxProps {
   prefCode: number;
   prefName: string;
+
+  //cookieDataは元々cookieにデータがあった場合にチェックボックスにチェックを入れるために使う。
   cookieData: string;
 }
-
-/*
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
-
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-//boundaryYearは2020でこれ以上は推定値
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
-}
-*/
-
-
 
 const Checkbox: React.FC<CheckboxProps> = ({
   prefCode,
@@ -41,35 +23,28 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   const [isChecked, setIsChecked] = useState(cookieData === prefName ? true :false);
 
-
-  //分割代入とselectorの書き方がある。再描画されるのは分割代入の方らしい
-  //https://reffect.co.jp/react/zustand#count-2
-
   const removePrefecture = usePrefStore((state) => state.removePrefPopulationData);
 
   const router = useRouter();
 
   //具体的な処理を書く
   const handleCheckboxChange = async () => {
-    document.cookie = 'isAfterRemove=true';
-    console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbb");
 
     if(isChecked){
-      //cookieの方でisAfterRemoveをtrueにする
-      
-      console.log("removePrefecture: " + prefName);
+      //ここはチェックボックスが外されたときの処理
       document.cookie = `prefCode=""`;
       document.cookie = `prefName=""`;
+
       removePrefecture(prefName);
-      console.log("ここがどうなっている");
+
+      //router.refreshによりサーバーコンポーネントの再描画を行う。
       router.refresh();
     }
     else{
+      //ここはチェックボックスが付けられたときの処理
       document.cookie = `prefCode=${encodeURIComponent(prefCode)}`;
       document.cookie = `prefName=${encodeURIComponent(prefName)}`;
-      //cookieの方でisAfterRemoveをfalseにする
-      document.cookie = 'isAfterRemove=false';
-      //increment();
+
       router.refresh();
     }
     

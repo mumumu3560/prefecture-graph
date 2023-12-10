@@ -54,31 +54,3 @@ interface PopulationData {
   
       return result;
   }
-  
-  /*
-  
-  // 例: テストデータ
-  const testData: PrefectureData[] = [
-      {
-          prefName: "Tokyo",
-          data: [
-              { label: "総人口", data: [{ year: 2020, value: 100, rate: 1.5 }, { year: 2021, value: 120, rate: 2.0 }] },
-              { label: "年少人口", data: [{ year: 2020, value: 30, rate: 1.2 }, { year: 2021, value: 40, rate: 1.8 }] }
-          ]
-      },
-      {
-          prefName: "Osaka",
-          data: [
-              { label: "総人口", data: [{ year: 2020, value: 80, rate: 1.2 }, { year: 2021, value: 90, rate: 1.5 }] },
-              { label: "年少人口", data: [{ year: 2020, value: 25, rate: 1.0 }, { year: 2021, value: 35, rate: 1.4 }] }
-          ]
-      }
-  ];
-  
-  
-  
-  
-  export const output = convertPrefectureData(testData2);
-  console.log(output);
-  
-  */
