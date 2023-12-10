@@ -1,4 +1,4 @@
-# 進捗や現在の問題などを書く
+# 進捗や現在の問題などを書くメモ帳のようなもの？実際だとslackとかに書く？かも
 
 ### 12/02 
 #### Cloudflare Pageでのbuildエラーについて OK
@@ -29,6 +29,8 @@ Cloudflare Pagesの設定で以下の部分で環境変数を追加するとproc
 
 ![Alt text](image.png)
 
+
+
 #### checkBoxの当たり判定 OK
 これを参考にしてみる
 https://quartet-communications.com/info/topics/7165
@@ -37,6 +39,8 @@ https://quartet-communications.com/info/topics/7165
 CheckBoxを作ったのでちゃんと動くかのテストを書く。
 fireEvent→userEventにしたほうがいい？まだテストについて良くわかっていない部分があるので
 勉強の必要がある。余裕のある時に。
+
+
 
 ### 12/04
 
@@ -59,9 +63,11 @@ http://takuri.realwork.jp/freematerials/2607
 
 ChatGPTを使ってCheckBoxListを作成したが問題がある。        
 まずスマホだと横にリストが並ばないし、PCでも画面を大きくとるのでグラフが下の方になってしまい
-スクロールが面倒
+スクロールが面倒→CSSで管理できる？
      
 ドロップダウンリストにチェックボックスを入れるようにしようか？
+
+
 
 ### 12/05 
 
@@ -73,6 +79,7 @@ https://deku.posstree.com/react/github-actions/prettier-eslint/
 t3のenv周りでエラーが出るがどうすればいい？よくわからない。余裕のある時に
 
 
+
 #### HighChartsでグラフを表示する
 https://zenn.dev/itch/articles/9aa61eb25d43a6
 https://zenn.dev/shimapon3/articles/13e3d4b147742c
@@ -80,6 +87,8 @@ https://zenn.dev/shimapon3/articles/13e3d4b147742c
 (自分の場合はOneSignalとかCloudflareとかGODOTとかでそうなった。)                
 ので経緯を書いてみる
 https://zenn.dev/mumumu3/scraps/e10841e0767b8d
+
+
 
 #### server componentsでの状態管理のやり方
 セキュリティを考慮すると、APIでデータを取得するにはclient componentsではなくserver componentsで取得したほうがいい。             
@@ -92,6 +101,8 @@ typescriptはここ
 https://github.com/pmndrs/zustand/blob/main/docs/guides/typescript.md
 https://qiita.com/s_taro/items/0c16f077d843ac1a78fa
 
+
+
 #### 北海道のチェックがおかしい。
 配列の状態管理がおかしい？北海道のCheckBoxをクリックしたときに元々配列に数字があるのに数字が入っていないことになっている。他の配列をクリックすると北海道以外は元に戻る          
 react 配列 状態 おかしい、next js 配列変化、でググる
@@ -103,12 +114,16 @@ https://www.monster-dive.com/blog/web_creative/20230825_002150.php
 そもそも親コンポーネントから配列を子ポーネントに渡してそこから配列を変化させるってのがよくない？
 ってことでZustandを使ってみる。という流れ。
 
+
+
 12/06
 #### CheckBoxの変更を考える。
 ユーザーの操作によってapi 取得 server components
 動的クエリという名前なのか。            
 urlかCookieかな？
 https://www.ai-shift.co.jp/techblog/3766
+
+
 
 12/07
 #### HighChartsがうまく使えない wait
@@ -127,6 +142,8 @@ We already have a closed issue related: https://github.com/highcharts/highcharts
 
 一応どうやって修正すればいいのかのようなものは書いてあるがそれはまだリリースされていないっぽい？                
 代わりにRechartsを使う？？
+
+
 
 #### Rechartsを使う。
 ![Alt text](image-2.png)
@@ -149,11 +166,14 @@ interface PopulationResult {
   data: PopulationCategory[];
 }
 
+
 これをそのままzustandに保存してデータを取り出すのは頑張る。
+
 
 難しくないか？？？      
 router.refresh()によって再描画される？どのサーバーコンポーネントが再描画される？ルート上の？
 https://www.commte.co.jp/learn-nextjs/useRouter
+
 
 どうやればいいのかわからないが、最初はCheckBoxの上にPrefectureがあるから        
 ・CheckBoxでCookie更新
@@ -162,24 +182,262 @@ https://www.commte.co.jp/learn-nextjs/useRouter
 しようと思ったがそれではすべてのチェックボックスに値が渡されるので新しくファイルを作りそこで
 storeの更新を行う。addするときにはデータをフェッチする必要があるためその場合にのみ使う。
 
-Cookieはたまってしまう？のでページを開いたときに削除するようにしたい。
+
+Cookieはたまってしまう？のでページを開いたときに削除するようにしたい。→次回も使えるようにする
 こういうエラーが出る
 Unhandled Runtime Error
 Error: Hydration failed because the initial UI does not match what was rendered on the server.
 
+
 See more infco here: https://nextjs.org/docs/messages/react-hydration-error
 うまくいかないなぁ。やっぱりやり方が違うのか？レンダリングとかでもrouter.refreshは悪そうだしどうすれば？
 
+
 そもそも面倒(主観)になっているのはclient componentではセキュリティの関係上api token等を保存するのがよくない。→server componentsでデータを取得する必要がある。→client componentから操作を受け付ける必要がある。→流れが「client component→server component→client component」のようになってしまうと思っているから
 
+
+
+#### zustandのpersist
 なにげなくpersist使っていたがこれがよくなかった
 https://qiita.com/s_taro/items/0c16f077d843ac1a78fa
 
+
+
+#### zustandの再レンダリングについて
 無限ループに入ってしまっていた。checkboxをチェックしたときにクッキーがrefreshされるのだがその時に親コンポーネントが再レンダリングされる。→prefecturesField_viewが再レンダリングされるとその子のCookieSave(client component)に処理が走るのだがここでaddprefectureが行われる→再レンダリング→親コンポーネントも再レンダリング→という無限ループだったらしい。
+
 
 CheckBox_viewでremove→親コンポーネント再レンダリング→cookieが残っている時にそのcookieに基づいてaddが行われてしまう。    
 削除の後cookieも削除する必要がある？
 
+
 router.refreshってどこが再レンダリングされるのだ？
 というよりzustandの方でselectされている要素が変更されると再レンダリングされることの方が
 影響が大きそう
+
+
+Cookie使うと前の情報が残るのをどうしたらいいだろうか？
+
+
+
+#### Chromeでreduxによりzustandにある型を確認したときの問題。
+zustandでのstateの型がundefinedになってしまう
+
+元々
+```
+addPrefPopulationData: (data: PopulationResult) => 
+          set((state) => {
+            if(state.prefPopulationData == null){
+              console.log("state.prefPopulationData is null");
+              return { prefPopulationData: [data], isAfterRemove: false };
+            }
+            const isPrefNameExist = state.prefPopulationData.some(prefData => prefData.prefName === data.prefName);
+            console.log("state.prefPopulationData:", state.prefPopulationData);
+                    
+            if (isPrefNameExist) {
+              console.log(`Population data for ${data.prefName} already exists. Skipping addition.`);
+              return { prefPopulationData: state.prefPopulationData, isAfterRemove: false };
+            }
+        
+            console.log('Adding population data:', data);
+            return { prefPopulationData: [...state.prefPopulationData, data], isAfterRemove: false };
+          }),
+```
+だったのだが
+
+```
+if(state.prefPopulationData == null){
+              console.log("state.prefPopulationData is null");
+              return { prefPopulationData: [data], isAfterRemove: false };
+            }
+```
+この部分でnullになるかもしれないと置いているのが悪かったようだ？ 
+それだけではなかった。
+
+```
+if(!receivedData || prefData === ""){
+    console.log("populationData is null");
+  }
+  else{
+    console.log("receivedData is not null");
+    const addingData:PopulationResult = receivedData!;
+    addPrefecture(addingData);
+    //console.log(populationData.length);
+  }
+```
+の
+```
+const addingData:PopulationResult = receivedData;
+const addingData:PopulationResult = receivedData!;
+```
+の最後に!をつけなければundefinedになってしまう。
+しかしCloudflareの方ではundefinedになる。うーんさっぱりわからん 
+
+何回かやってみて再現性があったのは、
+localhostに接続して、コンソールに何も表示されていないときにreduxで確認するとundefinedでないが、
+ページ画面のどこかしらをタップしてreduxを見るとundefinedになること。
+typescriptの型安全というよりzustandの問題？よくわからない。
+
+順番があるのかな？公式だとここにstoreを定義している？
+https://github.com/pmndrs/zustand/blob/main/examples/demo/src/App.jsx
+
+多分
+export const runtime = 'edge';
+による問題？    
+問題がありそうな部分は分かったがとりあえず保留にしておく。    
+TODO
+
+
+
+#### メモ。RESASから受け取ったデータ→Rechartsで使えるデータにする。
+TODOというよりこれはメモ    
+RESAS APIから取得したデータをRechartsで扱うためにデータ型を変更する必要があったのだが     
+ChatGPTを使った。
+最初にやったのはRESASから取得するデータの具体的な形と目的のデータの具体的な形をそのまま見せた。
+うまくいったかな？と思ったのは、見せるだけではなく、コードを出力してもらう前に、
+どういうデータ型を目的としているかを確認してもらった時だった。
+あとは行き詰ったなと思ったらリセットしたほうがいいときもあるな。
+
+最初のプロンプト
+```
+あなたがやるべきことはデータ型の変換です。
+
+具体的には
+type PopulationData = { year: number; value: number; rate: number };
+type PopulationGroup = { label: string; data: PopulationData[] };
+type PrefectureData = { prefName: string; data: PopulationGroup[] };
+という型があるときに、
+データとして
+input: PrefectureData[]
+が与えられるので、これをlabelごとに、
+以下のようなデータに直してください。
+
+type AllPrefecturesData = { year: number; [prefName: string]: number }[];
+
+なまえはそれぞれlabelごとに
+
+data_total: AllPrefecturesData
+data_child: AllPrefecturesData
+data_worker: AllPrefecturesData
+data_old: AllPrefecturesData
+としてください
+```
+で受け取ったコードに対して変換前のデータを渡してこれを入れるとどうなるかを聞いた。
+
+
+
+
+#### ルーター周りのテストがうまくいかない。
+久しぶりにCheckBoxのテストをしたらまずはcannnot find moduleと言われた。
+zustandが読み込めないらしい。これはjest.config.jsに@エイリアスを設定していないことが原因らしい
+次にその設定をした後テストを行うと長いエラーが出てきた。
+ChatGPTに聞くと以下のような返答。
+
+提供されたエラーメッセージからは、invariant expected app router to be mountedというエラーが示されています。これは、useRouterが期待するReactアプリケーションのルーターがマウントされていない場合に発生する可能性があります。
+
+エラーがCheckboxコンポーネントで発生しているようですが、Checkboxのコードやテストコードの関連部分を見てみましょう。
+
+以下は、確認すべきポイントです：
+
+Checkboxコンポーネント内のuseRouterの使用： Checkboxコンポーネント内でuseRouterが使用されている場合、Reactアプリケーションのルーターが正しくセットアップされていることを確認してください。
+
+これはnext/navigationによるものと考えられる。next/routerとnext/navigationの違いは？？？
+似たようなエラー
+https://fwywd.com/tech/next-testing-mock
+
+色々なところでreact-router-domが要求されていたのでinstallしてみる。
+これは必要ないかも  
+
+
+https://zenn.dev/tnyo43/articles/39e4caa321d0aa
+以下のようにするとテストが成功した。
+```
+//test3 チェックボックスのスタイルが正しく適用されているか(デフォルト)
+  test("test3 renders checkbox with default style", () => {
+    const { getByLabelText } = render(
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+    );
+    const checkboxElement = getByLabelText(/青森/i);
+    expect(checkboxElement.parentNode).toHaveClass("checkboxContainer");
+    // デフォルトスタイルが適用されていることを確認
+    expect(checkboxElement.parentNode).not.toHaveClass("checked");
+  });
+```
+CheckBoxが以下のようになっていて
+```
+<label className={`${styles.checkboxContainer} 
+        ${isChecked ? styles.checked : ""}`}>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
+      {prefName}
+      </label>
+```
+勘違いしていたのだが、getByLabelTextはlabelに対応した入力要素を取得するらしいので   
+これだと入力要素の親がclassNameを持っているのでparentNodeを使えばいいのか？
+
+ただtest4は以下のようになっており、
+
+```
+//test4 チェックボックスのスタイルが正しく適用されているか(チェックボックスクリック後)
+  test("test4 changes style on checkbox click", () => {
+    const { getByLabelText } = render(
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+    );
+
+    const checkboxLabel = getByLabelText(/青森/i);
+
+    // チェックボックスをクリックしてスタイルが変更されたことを確認
+    fireEvent.click(checkboxLabel);
+
+    expect(checkboxLabel.parentNode).toHaveClass("checked");
+  });
+```
+ここでfireEventによりチェックボタンをonにする。ここでrouter周りに注意が必要。   
+以下のようなエラーが出る
+router.refresh();
+TypeError: router.refresh is not a function
+router.refresh()ってどうすればいいんだ？スルーしておく？これはcomponentテストというよりもintegrationテストなのか？
+routerには他にも関数がある？
+next "navigation" test routerでググる。するとrouter.pushでエラーが出るというサイト発見
+https://dabohaze.site/next-js-react-testing-library-router-push-mock/
+
+router.refreshもrouter.pushも同じようなものだろうから参考になるだろう。
+これを参考にして以下のようにすれば処理をスルー出来ると推測。
+
+```
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      asPath: '/',
+      refresh: () => {return;},
+    };
+  },
+}));
+```
+これで通った。
+
+流れのようなものをメモしておこう。あまりやれていないので
+
+エラー内容から関数の定義がされていないのか？→関数を定義すればいい？→どうやって定義する？
+→調べる。どうやって？→関係あるワードでググる。
+→router.refreshは出てこないが、似たようなもの。例えばrouter.pushのようなものは出てくる
+→おそらく同じような物だろう。→router.refreshで調べるよりrouterで調べる方がいいかな？
+→上のサイトを見つけた。
+
+
+一般化？のようなものをしてみる。↓
+
+(エラーを調べることで)目的を確認(目的を関数の定義のやり方とする。)
+→具体的に調べるために今やっていることのキーワードを確認。
+→(test、jest、next、router.refresh、などがキーワード)
+→これらのワードで調べる。
+→関連するものでも調べる。
+(router.refreshそのままでは出てこないがrouter.pushなどの関連がありそうなものは見つけることができる。ここで必要とされるのは、物事を関連付ける能力？)
+→もう少し一般的にググる(router.refreshではなく、routerで)
+→やりたいこととほぼ同じサイトの発見。
+→実験
+→成功
+
