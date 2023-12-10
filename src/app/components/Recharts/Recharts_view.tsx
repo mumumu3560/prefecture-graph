@@ -1,9 +1,13 @@
 "use client";
 
-import React from "react"; /*{ useState } */ 
+import React, { useState } from "react"; /*{ useState } */ 
 import {usePrefStore} from '@/app/global/store';
 //import { useRouter } from "next/navigation";
 
+import { convertPrefectureData } from "./recharts_test222";
+
+/*
+*/
 
 interface PopulationData {
   year: number;
@@ -32,91 +36,68 @@ import {
   Legend
 } from "recharts";
 
-const data:{year: number, 北海道: number, 香川: number, amt: number}[] = [
-  {
-    year: 2000,
-    北海道: 4000,
-    香川: 2400,
-    amt: 2400
-  },
-  {
-    year: 2005,
-    北海道: 3000,
-    香川: 1398,
-    amt: 2210
-  },
-  {
-    year: 2010,
-    北海道: 2000,
-    香川: 9800,
-    amt: 2290
-  },
-  {
-    year: 2015,
-    北海道: 2780,
-    香川: 3908,
-    amt: 2000
-  },
-  {
-    year: 2020,
-    北海道: 1890,
-    香川: 4800,
-    amt: 2181
-  },
-  {
-    year: 2025,
-    北海道: 2390,
-    香川: 3800,
-    amt: 2500
-  },
-  {
-    year: 2030,
-    北海道: 3490,
-    香川: 4300,
-    amt: 2100
-  }
-];
-
 export default function App() {
   console.log("dddddddddddddddddd");
 
   const prefPopulationData: PopulationResult[] = usePrefStore((state) => state.prefPopulationData);
-  console.log("prefPopulationData: " + prefPopulationData);
-  console.log("ここがrecharts");
-  console.log(prefPopulationData[0]);
 
-  return (
-    <div>
-        <LineChart
-      width={500}
-      height={300}
-      data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="year" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line
-        type="monotone"
-        dataKey="香川"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
-      />
-      <Line type="monotone" dataKey="北海道" stroke="#82ca9d" />
+  const [activeGraph, setActiveGraph] = useState("総人口");
 
-    </LineChart>
+  const handleGraphChange = (graph: string) => {
+    setActiveGraph(graph);
+  };
 
-    <Line type="monotone" dataKey="北海道" stroke="#82ca9d" />
+  const data_all = convertPrefectureData(prefPopulationData);
+
+ //色はよくわからないので7色をループするようにする。
+    const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7f50', '#4caf50', '#2196f3', '#f44336'];
+    const shouldShowGraph = data_all[activeGraph] && data_all[activeGraph].length > 0;   
+    return (
+      <div>
+
+        <div>
+          <button onClick={() => handleGraphChange("総人口")}>総人口</button>
+          <button onClick={() => handleGraphChange("年少人口")}>年少人口</button>
+          <button onClick={() => handleGraphChange("生産年齢人口")}>生産年齢人口</button>
+          <button onClick={() => handleGraphChange("老年人口")}>老年人口</button>
+        </div>
+      
+        <div>
+        {shouldShowGraph && (
+          <LineChart
+            width={800}
+            height={400}
+            data={data_all[activeGraph]}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="year" label={{ value: "年度", position: "insideBottomRight", offset: 0 }} />
+            <YAxis label={{ value: "人口", angle: -90, position: "insideLeft" }}/>
+            <Tooltip />
+            <Legend />
     
-    </div>
-
-
-  );
+            {Object.keys(data_all[activeGraph][0]) // Assuming the first object in data contains all possible keys
+              .filter(key => key !== 'year') // Exclude 'year' from keys
+              .map((key, index) => (
+                <Line
+                  key={index}
+                  type="monotone"
+                  dataKey={key}
+                  stroke={colors[index % colors.length]} // Random color
+                  activeDot={{ r: 8 }}
+                />
+              ))
+            }
+          </LineChart>
+          )
+        }
+        </div>
+        {!shouldShowGraph && <p>都道府県のデータがありません。</p>}
+      </div>
+    );
 }
