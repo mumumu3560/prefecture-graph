@@ -6,8 +6,12 @@ import React from 'react'
 
 import Chart from "./components/Recharts/Recharts_view";
 //import { fetchPopulation } from "./components/api_relation/fecth_population";
-
+//import testChart from "./components/Recharts/recharts_test1";
+//import { convertPrefectureData } from "./components/Recharts/recharts_test222";
+//import { result } from "./components/Recharts/recharts_test2222";
 export const runtime = 'edge';
+
+
 
 interface Prefecture {
   prefCode: number;
@@ -37,19 +41,8 @@ interface PopulationResult {
 //https://zenn.dev/tfutada/articles/36ad71ab598019
 export default async function Home() {
   const prefectures: Prefecture[] = await fetchPrefectures();
-  //const populationResult: PopulationResult = await fetchPopulation(1, "北海道");
 
-
-  /*
-  console.log("populationResult:", populationResult);
-
-  console.log("prefectures:", prefectures[0]);
-  console.log("prefectures:", prefectures[1]); 
-  */
-
-  //console.log("Prefectures:", prefectures);
-  //<Chart></Chart>
-
+  
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>都道府県別人口推移グラフ</h1>
@@ -63,6 +56,9 @@ export default async function Home() {
 
       <div>
         <Chart></Chart>
+      </div>
+
+      <div>
       </div>
     </main>
   );
