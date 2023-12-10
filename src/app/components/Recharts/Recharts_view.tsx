@@ -4,7 +4,7 @@ import React, { useState } from "react"; /*{ useState } */
 import {usePrefStore} from '@/app/global/store';
 //import { useRouter } from "next/navigation";
 
-import { convertPrefectureData } from "./recharts_test222";
+import { convertPrefectureData } from "./recharts_data_converting";
 
 /*
 */
