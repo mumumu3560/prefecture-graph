@@ -1,3 +1,4 @@
+import 'server-only'
 import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
