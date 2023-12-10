@@ -7,9 +7,25 @@ import React from "react";
 //https://typescriptbook.jp/tutorials/component-test
 //https://stackoverflow.com/questions/69193525/how-to-get-the-correct-classname-in-react-testing-if-there-are-multiple-classnam
 
-/*
+beforeAll(() => {
+  // Cookieの設定
+  Object.defineProperty(global.document, 'cookie', {
+    writable: true,
+    configurable: true,
+    value: '',         
+  });
+});
 
-*/
+afterEach(() => {
+  // Cookieの値は都度初期化
+  Object.defineProperty(global.document, 'cookie', {
+    writable: true,
+    configurable: true,
+    value: '',
+  });
+});
+
+
 jest.mock('next/navigation', () => ({
   useRouter() {
     return {
@@ -19,11 +35,21 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
-//jest.mock("next/navigation", () => ({ useRouter() { return { push: () => { return; }, }; },))
-//jest.mock('next/router', () => require('next-router-mock'));
 
-//jest.mock('next/navigation', () => require('next/router'));
+/*
+const mockFunction = jest.fn();
 
+beforeAll(() => {
+  Object.defineProperty(document, 'cookie', {
+    get: mockFunction,
+  });
+});
+
+beforeEach(() => {
+  mockFunction.mockReturnValue('');
+});
+
+*/
 
 describe("Buttonコンポーネントのテスト", () => {
   //test1 チェックボックスのラベルが正しく表示されているかこれはTokyoと表示されるか
@@ -77,4 +103,29 @@ describe("Buttonコンポーネントのテスト", () => {
 
     expect(checkboxLabel.parentNode).toHaveClass("checked");
   });
+
+  //test5 cookieのテスト
+  test("test5 changes style on checkbox click", () => {
+
+    const { getByLabelText } = render(
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+    );
+
+    
+
+    const checkboxLabel = getByLabelText(/青森/i);
+
+    expect(checkboxLabel).not.toBeChecked();
+
+    fireEvent.click(checkboxLabel);
+
+    expect(checkboxLabel).toBeChecked();
+    
+    expect(document.cookie).toContain(`prefName=${encodeURIComponent("青森")}`);
+
+    //expect(document.cookie).toContain(`prefCode=${encodeURIComponent(1)}`);
+
+  });
+
+
 });
