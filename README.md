@@ -4,15 +4,29 @@ https://yumemi.notion.site/0e9ef27b55704d7882aab55cc86c999d
 
 ### 使うもの
 Next.js    
-Highcharts(グラフ)       
+Highcharts(グラフ)→Rechartsに変更       
 VSCode+Git    
 RESAS API    
+Jest、testing-library       
+
+### ファイルについて
+
+QUESTION.mdは作成中に生じた疑問。実際にはslackなどで聞く？ 
+
+TODO.mdはこれからやることやメモ等を書いておく場所で進捗報告のようなもの。       
+自分の考えややっていることなどがわかればいいなと思った。        
+あとはメタ的に自分のやっていることやどうやってやっているかを確認したいと思って書いた。
+
+あとはZennにメモもした。
+
+imageはTODOに画像を張り付けた際のもの。
 
 
-### 考えたこと
+### 最初に考えたこと
 ・誰が使う？→都道府県別の総人口、年少人口、生産年齢人口、老年人口を表示させる→今だと少子高齢化について調べる人とかが使いそう特に学生とか。   
 ・excelとかで自分でデータをこねくり回せるようにCSVとかをダウンロードできるようにする？    
 ・年齢層別の情報が知りたいのなら棒グラフでそれぞれの年齢層の割合を棒グラフで年ごとに表示する？    
+
 
 ### 概形(目標)
 ![prefecture](https://github.com/mumumu3560/prefecture-graph/assets/142517194/ab8234b6-5ffc-4a3b-826a-2d06a62ff917)    
