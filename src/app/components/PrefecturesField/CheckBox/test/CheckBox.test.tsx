@@ -55,7 +55,7 @@ describe("Buttonコンポーネントのテスト", () => {
   //test1 チェックボックスのラベルが正しく表示されているかこれはTokyoと表示されるか
   test("test1 renders checkbox with correct label", () => {
     const { getByText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
     );
 
     const labelElement = getByText(/青森/i);
@@ -69,6 +69,7 @@ describe("Buttonコンポーネントのテスト", () => {
         prefCode={2}
         prefName="青森"
         cookieData="青森"
+        areaCode={1}
       />,
     );
 
@@ -82,7 +83,7 @@ describe("Buttonコンポーネントのテスト", () => {
   //test3 チェックボックスのスタイルが正しく適用されているか(デフォルト)
   test("test3 renders checkbox with default style", () => {
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
     );
     const checkboxElement = getByLabelText(/青森/i);
     expect(checkboxElement.parentNode).toHaveClass("checkboxContainer");
@@ -93,7 +94,7 @@ describe("Buttonコンポーネントのテスト", () => {
   //test4 チェックボックスのスタイルが正しく適用されているか(チェックボックスクリック後)
   test("test4 changes style on checkbox click", () => {
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
     );
 
     const checkboxLabel = getByLabelText(/青森/i);
@@ -108,7 +109,7 @@ describe("Buttonコンポーネントのテスト", () => {
   test("test5 changes style on checkbox click", () => {
 
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
     );
 
     
