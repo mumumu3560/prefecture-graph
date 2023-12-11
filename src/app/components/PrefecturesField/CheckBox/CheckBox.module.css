@@ -40,6 +40,21 @@
   border: 2px solid #aaa; /* 任意の枠線のスタイルと色を指定 */
   margin: 4px; /* 任意のマージンを指定 */
   padding: 4px; /* 任意のパディングを指定 */
-  font-size: 16px; /* 任意のフォントサイズを指定 */
   cursor: pointer;
+
+  /*ユーザーがチェックボックスを選択できないようにする*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/*チェックボックスのスタイル*/
+.checkboxContainer:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
+}
+
+.checkboxContainer:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1); 
 }
