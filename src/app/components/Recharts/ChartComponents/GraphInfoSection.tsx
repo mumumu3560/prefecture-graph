@@ -11,6 +11,7 @@ const GraphInfoSection: React.FC<GraphInfoSectionProps> = ({ activeGraph, bounda
   <>
     <div className={styles.title}>{activeGraph}推移</div>
     <div className={styles.comment}>
+      
       ※{boundaryYear}年以降は推測値 出典:
       <a href="https://resas.go.jp/" target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
         RESAS
