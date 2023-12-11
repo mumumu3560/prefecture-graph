@@ -1,19 +1,7 @@
-/*
 .main {
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 100vh;
-}
-*/
-
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  /*align-items: center;*/
   padding: 1rem;
   min-height: 100vh;
 }
@@ -24,4 +12,9 @@
   margin-bottom: 1rem;
   background-color: #aaf0e8;
   text-align: center;
+}
+
+.subtitle{
+  /*見出しは左に寄せたい*/
+  text-align: left;
 }
