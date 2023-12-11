@@ -52,7 +52,6 @@ interface PopulationData {
                   if (existingData) {
                       //c++でいうところのmapのようなものprefNameがkeyでpopulationData.valueがvalue
                       existingData[prefName] = populationData.value;
-                      //existingData[prefName] = (existingData[prefName] || 0) + populationData.value;
                   } else {
                     // 対応するyearがなければ新しいデータを作って、prefNameの値をpopulationData.valueにする。
                       const newData = { year: populationData.year, [prefName]: populationData.value };

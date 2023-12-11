@@ -2,32 +2,21 @@ export const data1 = [
     {
     prefName: '千葉県',
     data: [
-
         {
             label: '総人口',
-            data: [
-                { year: 1960, value: 2306010, rate: -1 },
-            ]
+            data: [{ year: 1960, value: 2306010, rate: -1 },]
         },
-
         {
             label: '年少人口',
-            data: [
-                { year: 1960, value: 700195, rate: 30.36 },
-            ]
+            data: [{ year: 1960, value: 700195, rate: 30.36 },]
         },
         {
             label: '生産年齢人口',
-            data: [
-                { year: 1960, value: 1458717, rate: 63.26 },
-            ]
+            data: [{ year: 1960, value: 1458717, rate: 63.26 },]
         },
-
         {
             label: '老年人口',
-            data: [
-                { year: 1960, value: 147098, rate: 6.38 },
-            ]
+            data: [{ year: 1960, value: 147098, rate: 6.38 },]
         }
     ],
     },

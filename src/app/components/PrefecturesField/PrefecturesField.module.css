@@ -2,6 +2,7 @@
 .container {
     border: 2px solid gray; /* #ccc枠線のスタイルと色を指定 */
     padding: 10px; /* 必要に応じてパディングを追加 */
+    margin: 20px; /* 必要に応じてマージンを追加 */
   }
   
   /* 各地域のセクションに適用されるスタイル */

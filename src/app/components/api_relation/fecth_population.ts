@@ -17,6 +17,7 @@ interface PopulationResult {
   data: PopulationCategory[];
 }
 
+
 const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult | null> => {
 
   if(isNaN(prefCode) || prefName == ""){
@@ -46,7 +47,6 @@ const fetchPopulation = async (prefCode: number, prefName: string): Promise<Popu
       })),
     };
 
-    // console.log("Formatted Data:", formattedData);
     return formattedData;
   } catch (error) {
     throw error;
