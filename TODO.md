@@ -224,7 +224,7 @@ Cookie使うと前の情報が残るのをどうしたらいいだろうか？
 zustandでのstateの型がundefinedになってしまう
 
 元々
-```
+``` tsx
 addPrefPopulationData: (data: PopulationResult) => 
           set((state) => {
             if(state.prefPopulationData == null){
@@ -245,7 +245,7 @@ addPrefPopulationData: (data: PopulationResult) =>
 ```
 だったのだが
 
-```
+``` tsx
 if(state.prefPopulationData == null){
               console.log("state.prefPopulationData is null");
               return { prefPopulationData: [data], isAfterRemove: false };
@@ -254,7 +254,7 @@ if(state.prefPopulationData == null){
 この部分でnullになるかもしれないと置いているのが悪かったようだ？ 
 それだけではなかった。
 
-```
+``` tsx
 if(!receivedData || prefData === ""){
     console.log("populationData is null");
   }
@@ -324,7 +324,28 @@ data_old: AllPrefecturesData
 ```
 で受け取ったコードに対して変換前のデータを渡してこれを入れるとどうなるかを聞いた。
 
+``` tsx
+type ResultType = {
+      総人口: AllPrefecturesData;
+      年少人口: AllPrefecturesData;
+      生産年齢人口: AllPrefecturesData;
+      老年人口: AllPrefecturesData;
+      [key: string]: AllPrefecturesData; // インデックスシグネチャを追加
+  };
 
+```
+ChatGPTに聞いたときに上のようなコードをもらった。これでエラーが出ないのなんで何だろうかと疑問に思った。
+
+``` tsx
+type ResultType = {
+      "総人口": AllPrefecturesData;
+      "年少人口": AllPrefecturesData;
+      "生産年齢人口": AllPrefecturesData;
+      "老年人口": AllPrefecturesData;
+      [key: string]: AllPrefecturesData; // インデックスシグネチャを追加
+  };
+```
+ならまあそうかもしれないなぁと思うが
 
 
 #### ルーター周りのテストがうまくいかない。
@@ -351,7 +372,7 @@ https://fwywd.com/tech/next-testing-mock
 
 https://zenn.dev/tnyo43/articles/39e4caa321d0aa
 以下のようにするとテストが成功した。
-```
+``` tsx
 //test3 チェックボックスのスタイルが正しく適用されているか(デフォルト)
   test("test3 renders checkbox with default style", () => {
     const { getByLabelText } = render(
@@ -364,7 +385,7 @@ https://zenn.dev/tnyo43/articles/39e4caa321d0aa
   });
 ```
 CheckBoxが以下のようになっていて
-```
+``` tsx
 <label className={`${styles.checkboxContainer} 
         ${isChecked ? styles.checked : ""}`}>
         <input
@@ -380,7 +401,7 @@ CheckBoxが以下のようになっていて
 
 ただtest4は以下のようになっており、
 
-```
+``` tsx
 //test4 チェックボックスのスタイルが正しく適用されているか(チェックボックスクリック後)
   test("test4 changes style on checkbox click", () => {
     const { getByLabelText } = render(
@@ -407,7 +428,7 @@ https://dabohaze.site/next-js-react-testing-library-router-push-mock/
 router.refreshもrouter.pushも同じようなものだろうから参考になるだろう。
 これを参考にして以下のようにすれば処理をスルー出来ると推測。
 
-```
+``` tsx
 jest.mock('next/navigation', () => ({
   useRouter() {
     return {
@@ -440,4 +461,121 @@ jest.mock('next/navigation', () => ({
 →やりたいこととほぼ同じサイトの発見。
 →実験
 →成功
+
+
+#### cookieのテストはどうやるの？
+
+CheckBoxではcookieを変更→router.refreshが肝要である。refreshは単体テストできない？と思っているのでまずはcookieが変更されているかを調べよう。
+
+いろいろググる。関係ありそうなサイト
+https://qiita.com/pg_yamaton/items/7f96721c15faacf93f28
+https://github.com/vercel/next.js/discussions/44270
+https://zenn.dev/take14/scraps/b16357f15f2864
+
+zennで試す。以下のようにした。
+
+``` tsx
+//test5 cookieのテスト
+  test("test5 changes style on checkbox click", () => {
+    
+    const { getByLabelText } = render(
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" />,
+    );
+
+    const checkboxLabel = getByLabelText(/青森/i);
+
+
+    expect(checkboxLabel).not.toBeChecked();
+
+    fireEvent.click(checkboxLabel);
+    expect(checkboxLabel).toBeChecked();
+
+    expect(document.cookie).toEqual("prefCode=1; prefName=%E9%9D%92%E6%A3%AE");
+
+  });
+```
+
+テストは以下のようになる。
+```
+Expected: "prefCode=1; prefName=%E9%9D%92%E6%A3%AE"
+Received: "prefName=%E9%9D%92%E6%A3%AE"
+```
+これはおかしい。つまりCheckBox_view.tsxがおかしかったということ。具体的にどうなっているか見る
+
+``` tsx
+document.cookie = `prefCode=${encodeURIComponent(prefCode)}`;
+document.cookie = `prefName=${encodeURIComponent(prefName)}`;
+```
+この順番を逆にしてみると、testの方では、prefCodeだけがdocument.cookieにある状態となる。
+
+例えば以下のサイトのdocument.cookieを見ると。
+https://qiita.com/pg_yamaton/items/7f96721c15faacf93f28
+
+``` tsx
+document.cookie = `hogeKey=anyValue; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; domain=${hostname}`;
+```
+のようにしている。つまり;で区切るのが正解なのか？
+
+``` tsx
+document.cookie = `prefCode=${encodeURIComponent(prefCode)}; prefName=${encodeURIComponent(prefName)}`;
+```
+
+これによりテストが通る。
+
+と思ったが、違う。
+
+prefectureField_logic.tsでは以下のようになっていた。
+``` ts
+const cookieStore = cookies();
+    
+const fetchPrefCode = decodeURIComponent(cookieStore.get("prefCode")?.value ?? "");
+const fetchPrefName = decodeURIComponent(cookieStore.get("prefName")?.value ?? "");
+```
+
+したがっておかしいのはテストの方
+
+これテストの参考になりそう
+https://zenn.dev/aidemy/articles/62720a7cab9115#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB
+
+useCookiesを使った方がいい？
+https://kabeuchi.me/blogs/2023-01-15-002
+https://kabeuchi.me/blogs/2023-01-15-002
+
+わからないTODO
+
+``` tsx
+beforeAll(() => {
+  // Cookieの設定
+  Object.defineProperty(global.document, 'cookie', {
+    writable: true,
+    configurable: true,
+    value: '',         
+  });
+});
+```
+この部分でcookieの定義を行っているようだ？つまり本番の環境とは違い、    
+document.cookie=
+をすると追加ではなく上書きになってしまうのか      
+
+どうすればいいのだろうか？→Q
+
+#### Githubでの環境変数の設定は？
+以下のサイトが参考になりそう
+https://developer.mamezou-tech.com/blogs/2023/01/16/github-actions-configuration-variables/
+
+
+#### CSSをやろう。スマホサイズなども考慮しよう
+ロジック周りは大体できたのでCSSで形を整える。
+画面の大きさによってチャートや文字の大きさを変える必要がある。
+
+https://zenn.dev/masa5714/articles/0a05659cf6e84b
+https://zenn.dev/developanda/articles/daf34873fe4ef4
+
+https://copipe-de-waku.jimdofree.com/%E3%82%B3%E3%83%94%E3%83%9A%E3%81%A7%E3%81%8D%E3%82%8B%E6%96%87%E5%AD%97/%E6%96%87%E5%AD%97%E3%81%AE%E6%8B%A1%E5%A4%A7%E7%B8%AE%E5%B0%8F/
+
+Rechartsのやつはこれがよさそう
+https://zenn.dev/acha_n/articles/how-to-customize-recharts
+
+CSSのボタンのやつはこれがよさそう
+https://jajaaan.co.jp/css/button/
 
