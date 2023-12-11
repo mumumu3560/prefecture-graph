@@ -2,6 +2,8 @@
 import React from 'react';
 import { LineChart } from 'recharts';
 
+import { CartesianGrid, XAxis } from 'recharts';
+
 const NoGraphSection: React.FC = () => (
   <LineChart
     width={800}
@@ -14,7 +16,8 @@ const NoGraphSection: React.FC = () => (
       bottom: 5,
     }}
   >
-    {/* ... 他のコード */}
+    <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="year" label={{ value: "年度", position: "insideBottom", offset: 0 }}/>
   </LineChart>
 );
 
