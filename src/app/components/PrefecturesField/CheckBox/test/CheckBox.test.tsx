@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, /*screen, */ fireEvent } from "@testing-library/react";
-import CheckBoxView from "./CheckBox_view";
+import CheckBoxView from "../CheckBox_view";
 import React from "react";
 
 //参考
