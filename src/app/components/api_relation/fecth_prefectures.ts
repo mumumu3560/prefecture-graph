@@ -1,4 +1,4 @@
-import 'server-only'
+import "server-only";
 import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
@@ -20,10 +20,12 @@ const fetchPrefectures = async (): Promise<Prefecture[]> => {
 
     const result = await response.json();
 
-    const formattedData: Prefecture[] = result.result.map((prefecture: { prefCode: number; prefName: string }) => ({
-      prefCode: prefecture.prefCode,
-      prefName: prefecture.prefName,
-    }));
+    const formattedData: Prefecture[] = result.result.map(
+      (prefecture: { prefCode: number; prefName: string }) => ({
+        prefCode: prefecture.prefCode,
+        prefName: prefecture.prefName,
+      }),
+    );
 
     return formattedData;
   } catch (error) {
@@ -32,13 +34,6 @@ const fetchPrefectures = async (): Promise<Prefecture[]> => {
 };
 
 export { fetchPrefectures };
-
-
-/*
-server componentsでapi取得 
-NEXT_PUBLIC_をつけることで、クライアントサイドからも参照可能になるが今回はセキュリティを考慮してサーバーサイドのみで参照する
-また型定義も必要↓
-*/
 
 /*
 参考サイト

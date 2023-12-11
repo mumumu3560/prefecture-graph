@@ -1,14 +1,22 @@
 // NoGraphSection.tsx
-import React from 'react';
-import { LineChart } from 'recharts';
+import React from "react";
+import { LineChart } from "recharts";
 
-import { CartesianGrid, XAxis } from 'recharts';
+import { CartesianGrid, XAxis } from "recharts";
 
-const NoGraphSection: React.FC = () => (
+interface NoGraphSectionProps {
+  mediaWidth: number;
+  mediaHeight: number;
+}
+
+const NoGraphSection: React.FC<NoGraphSectionProps> = ({
+  mediaWidth,
+  mediaHeight,
+}) => (
   <LineChart
-    width={800}
-    height={400}
-    data={[{ year: '', data1: 0, data2: 0, data3: 0 }]}
+    width={mediaWidth}
+    height={mediaHeight}
+    data={[{ year: "", data1: 0, data2: 0, data3: 0 }]}
     margin={{
       top: 5,
       right: 30,
@@ -17,7 +25,10 @@ const NoGraphSection: React.FC = () => (
     }}
   >
     <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="year" label={{ value: "年度", position: "insideBottom", offset: 0 }}/>
+    <XAxis
+      dataKey="year"
+      label={{ value: "年度", position: "insideBottom", offset: 0 }}
+    />
   </LineChart>
 );
 

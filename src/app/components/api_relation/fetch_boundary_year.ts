@@ -1,9 +1,7 @@
-import 'server-only'
+import "server-only";
 import { env } from "@/env/server.mjs";
 
-
 const fetchBoundaryYear = async (): Promise<number> => {
-
   try {
     const response = await fetch(`${env.POPULATION_API_URL}${1}`, {
       headers: { "X-API-KEY": env.API_KEY },
@@ -16,7 +14,6 @@ const fetchBoundaryYear = async (): Promise<number> => {
     const result = await response.json();
 
     const boundaryYear = result.result.boundaryYear;
-
 
     return boundaryYear;
   } catch (error) {

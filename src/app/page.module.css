@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-.title{
+.title {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-.subtitle{
+.subtitle {
   /*見出しは左に寄せたい*/
   text-align: left;
 }
