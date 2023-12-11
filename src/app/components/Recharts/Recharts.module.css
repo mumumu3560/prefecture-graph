@@ -1,0 +1,31 @@
+.graph .title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.graph .buttons{
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: right;
+    color: #000;
+}
+
+.comment{
+    text-align: right;
+    font-size: 14px;
+    padding-bottom: 6px;
+}
+
+
+.externalLink {
+    color: blue; /* 青色に設定 */
+    text-decoration: underline; /* 下線を追加 */
+    cursor: pointer; /* マウスオーバー時にカーソルをポインターに変更 */
+  }
+  
+  .externalLink:hover {
+    text-decoration: none; /* マウスオーバー時に下線を解除 */
+  }
