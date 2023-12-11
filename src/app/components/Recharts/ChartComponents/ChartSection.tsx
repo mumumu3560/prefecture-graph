@@ -1,8 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-import styles from "./Recharts.module.css";
-
 type AllPrefecturesData = { year: number; [prefName: string]: number }[];
 
 type ResultType = {
@@ -10,17 +8,17 @@ type ResultType = {
   "年少人口": AllPrefecturesData;
   "生産年齢人口": AllPrefecturesData;
   "老年人口": AllPrefecturesData;
-  [key: string]: AllPrefecturesData; // インデックスシグネチャを追加
+  [key: string]: AllPrefecturesData; 
 };
 
 interface ChartSectionProps {
-  data_all: ResultType; // データ型は適宜変更してください
+  data_all: ResultType; // 
   activeGraph: string;
   colors: string[];
 }
 
 interface ChartSectionProps {
-  data_all: ResultType; // データ型は適宜変更してください
+  data_all: ResultType; // 
   activeGraph: string;
   colors: string[];
 }
