@@ -1,15 +1,15 @@
-// NoGraphSection.tsx
+// NoChartSection.tsx
 import React from "react";
 import { LineChart } from "recharts";
 
 import { CartesianGrid, XAxis } from "recharts";
 
-interface NoGraphSectionProps {
+interface NoChartSectionProps {
   mediaWidth: number;
   mediaHeight: number;
 }
 
-const NoGraphSection: React.FC<NoGraphSectionProps> = ({
+const NoChartSection: React.FC<NoChartSectionProps> = ({
   mediaWidth,
   mediaHeight,
 }) => (
@@ -32,4 +32,4 @@ const NoGraphSection: React.FC<NoGraphSectionProps> = ({
   </LineChart>
 );
 
-export default NoGraphSection;
+export default NoChartSection;

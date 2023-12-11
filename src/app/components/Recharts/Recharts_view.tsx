@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { usePrefStore } from "@/app/global/store";
 import { convertPrefectureData } from "./recharts_data_converting";
 import ChartSection from "./ChartComponents/ChartSection";
-import NoGraphSection from "./ChartComponents/NoGraphSection";
-import GraphInfoSection from "./ChartComponents/GraphInfoSection";
+import NoChartSection from "./ChartComponents/NoChartSection";
+import ChartInfoSection from "./ChartComponents/ChartInfoSection";
 import ButtonsSection from "./ChartComponents/ButtonSection";
 
 import styles from "./Recharts.module.css";
@@ -72,7 +72,7 @@ export default function PopulationChart({
     <ResponsiveContainer width="90%">
       <div>
         <div className={styles.graph}>
-          <GraphInfoSection
+          <ChartInfoSection
             activeGraph={activeGraph}
             boundaryYear={boundaryYear}
           />
@@ -88,7 +88,7 @@ export default function PopulationChart({
               />
             </div>
           ) : (
-            <NoGraphSection
+            <NoChartSection
               mediaWidth={chartDimensions.width}
               mediaHeight={chartDimensions.height}
             />
