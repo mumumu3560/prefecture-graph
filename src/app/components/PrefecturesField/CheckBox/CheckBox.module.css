@@ -1,7 +1,37 @@
-/*チェックボックスがチェックされたときに背景色を変える*/
-.checked {
-  background-color: #aaf0e8;
+
+
+/*areaCode毎に背景色を変更する*/
+.areaCode0{
+  background-color: #ffa600;
 }
+
+.areaCode1{
+  background-color: #9dff00;
+}
+
+.areaCode2{
+  background-color: #2fff00;
+}
+
+.areaCode3{
+  background-color: #00ffe1;
+}
+
+.areaCode4{
+  background-color: #00ccff;
+}
+
+.areaCode5{
+  background-color: #f9bbff;
+}
+
+.areaCode6{
+  background-color: #ffb5bc;
+}
+
+
+
+
 
 /*チェックボックスのスタイル*/
 .checkboxContainer {

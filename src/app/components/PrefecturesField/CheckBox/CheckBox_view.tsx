@@ -13,12 +13,15 @@ interface CheckboxProps {
 
   //cookieDataは元々cookieにデータがあった場合にチェックボックスにチェックを入れるために使う。
   cookieData: string;
+
+  areaCode: number;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   prefCode,
   prefName,
-  cookieData
+  cookieData,
+  areaCode
 }) => {
 
   const [isChecked, setIsChecked] = useState(cookieData === prefName ? true :false);
@@ -54,18 +57,45 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
   };
 
+  //地域ごとにチェックボックスの色を変えてみた。
+  const getAreaCodeClassName = () => {
+    switch (areaCode) {
+      case 0:
+        return isChecked ? styles.areaCode0 : "";
+      case 1:
+        return isChecked ? styles.areaCode1 : "";
+      case 2:
+        return isChecked ? styles.areaCode2 : "";
+      case 3:
+        return isChecked ? styles.areaCode3 : "";
+      case 4:
+        return isChecked ? styles.areaCode4 : "";
+      case 5:
+        return isChecked ? styles.areaCode5 : "";
+      case 6:
+        return isChecked ? styles.areaCode6 : "";
+      default:
+        return ""; // デフォルトのクラス名
+    }
+  };
+
   
 
   return (
 
     <div>
-      <label className={`${styles.checkboxContainer} 
-        ${isChecked ? styles.checked : ""}`}>
+      <label className={`
+      ${styles.checkboxContainer} 
+      ${isChecked ? styles.checked : ""} 
+      ${getAreaCodeClassName()}
+      `}>
+
         <input
           type="checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
         />
+
       {prefName}
       </label>
 

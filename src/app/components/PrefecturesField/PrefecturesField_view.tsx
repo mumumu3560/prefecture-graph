@@ -92,7 +92,6 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
 
     //開始インデックスから都道府県の数を足したインデックスを取得
     const endIndex:number = startIndex + eachPrefecturesNum[areaIndex];
-    //<CookieSave populationData={await CookieGet()}></CookieSave>
     
     //開始インデックスから終了インデックスまでの都道府県を取得
     const areaPrefectures:Prefecture[] = prefectures.slice(startIndex, endIndex);
@@ -108,9 +107,12 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
         prefCode={prefecture.prefCode}
         prefName={prefecture.prefName}
         cookieData={cookieData}
+        areaCode={areaIndex}
       />
     ));
   };
+
+  
 
   
 
