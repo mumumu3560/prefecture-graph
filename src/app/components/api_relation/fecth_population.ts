@@ -1,8 +1,6 @@
-import axios from "axios";
+import 'server-only'
 import { env } from "@/env/server.mjs";
 
-//RESAS APIのデータ元
-//https://opendata.resas-portal.go.jp/docs/api/v1/population/composition/perYear.html
 interface PopulationData {
   year: number;
   value: number;
@@ -14,38 +12,43 @@ interface PopulationCategory {
   data: PopulationData[];
 }
 
-//boundaryYearは2020でこれ以上は推定値
 interface PopulationResult {
-  boundaryYear: number;
+  prefName: string;
   data: PopulationCategory[];
 }
 
-const fetchPopulation = async (prefCode: number): Promise<PopulationResult> => {
+
+const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult | null> => {
+
+  if(isNaN(prefCode) || prefName == ""){
+    return null;
+  }
   try {
-    const results = await axios.get<{
-      message: null;
-      result: PopulationResult;
-    }>(`${env.POPULATION_API_URL}${prefCode}`, {
+    const response = await fetch(`${env.POPULATION_API_URL}${prefCode}`, {
       headers: { "X-API-KEY": env.API_KEY },
     });
 
-    //resultにはmessage:nullがあるのでそれは除外
+    if (!response.ok) {
+      throw new Error(`Failed to fetch population data for ${prefName}: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    // resultにはmessage:nullがあるのでそれは除外
     const formattedData: PopulationResult = {
-      boundaryYear: results.data.result.boundaryYear,
-      data: results.data.result.data.map((category: PopulationCategory) => ({
+      prefName: prefName,
+      data: result.result.data.map((category: PopulationCategory) => ({
         label: category.label,
         data: category.data.map((populationData: PopulationData) => ({
           year: populationData.year,
           value: populationData.value,
-          rate: populationData.rate || undefined,
+          rate: populationData.rate || -1,
         })),
       })),
     };
 
-    console.log("Formatted Data:", formattedData);
     return formattedData;
   } catch (error) {
-    console.error("Error fetching data:", error);
     throw error;
   }
 };

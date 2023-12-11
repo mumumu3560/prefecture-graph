@@ -1,0 +1,60 @@
+
+
+/*areaCode毎に背景色を変更する*/
+.areaCode0{
+  background-color: #ffa600;
+}
+
+.areaCode1{
+  background-color: #9dff00;
+}
+
+.areaCode2{
+  background-color: #2fff00;
+}
+
+.areaCode3{
+  background-color: #00ffe1;
+}
+
+.areaCode4{
+  background-color: #00ccff;
+}
+
+.areaCode5{
+  background-color: #f9bbff;
+}
+
+.areaCode6{
+  background-color: #ffb5bc;
+}
+
+
+
+
+
+/*チェックボックスのスタイル*/
+.checkboxContainer {
+  display: inline-block; /* チェックボックスを囲むコンテナをインラインブロック要素に設定 */
+  border-radius: 8px; /* 任意の角丸の半径を指定 */
+  border: 2px solid #aaa; /* 任意の枠線のスタイルと色を指定 */
+  margin: 4px; /* 任意のマージンを指定 */
+  padding: 4px; /* 任意のパディングを指定 */
+  cursor: pointer;
+
+  /*ユーザーがチェックボックスを選択できないようにする*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/*チェックボックスのスタイル*/
+.checkboxContainer:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
+}
+
+.checkboxContainer:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1); 
+}

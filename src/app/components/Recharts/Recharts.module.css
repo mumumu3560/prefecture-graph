@@ -1,0 +1,83 @@
+.graph .title{
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+
+
+.graph .comment{
+    text-align: right;
+    font-size: 14px;
+    padding-bottom: 6px;
+}
+
+
+.externalLink {
+    color: blue; /* 青色に設定 */
+    text-decoration: underline; /* 下線を追加 */
+    cursor: pointer; /* マウスオーバー時にカーソルをポインターに変更 */
+  }
+  
+  .externalLink:hover {
+    text-decoration: none; /* マウスオーバー時に下線を解除 */
+  }
+
+  .buttons {
+    text-align: right;
+  font-size: 14px;
+  line-height: 1.5;
+  
+  
+  padding: 2px;
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  
+  color: #212529;
+  border-radius: 0.5rem;
+    
+  }
+
+  .buttons button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1); 
+  }
+  
+  .buttons button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1); 
+  }
+
+  
+  
+  .buttons .all:hover {
+    background: #c0392b; /* 赤色（ホバー時） */
+    transform: translate3d(0, 1px, 0);
+  }
+  
+  /* 年少人口ボタンのスタイル */
+
+  .buttons .child:hover {
+    background: #2980b9; /* 青色（ホバー時） */
+    transform: translate3d(0, 1px, 0);
+  }
+  
+  /* 生産年齢人口ボタンのスタイル */
+  
+  .buttons .worker:hover {
+    background: #27ae60; /* 緑色（ホバー時） */
+    transform: translate3d(0, 1px, 0);
+  }
+  
+  /* 老年人口ボタンのスタイル */
+  .buttons .old:hover {
+    background: #d35400; /* オレンジ色（ホバー時） */
+    transform: translate3d(0, 1px, 0);
+  }
