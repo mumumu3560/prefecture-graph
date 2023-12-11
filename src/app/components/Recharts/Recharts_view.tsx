@@ -26,9 +26,18 @@ export default function PopulationChart({
     const handleResize = () => {
       const chartContainer = document.getElementById("chart-container");
       if (chartContainer) {
-        const width = chartContainer.clientWidth;
-        const height = width * 0.7; // 例: 幅の半分の高さに設定
-        setChartDimensions({ width, height });
+
+        //画面の大きさによってグラフの大きさを変更
+        if(chartContainer.clientWidth < 500){
+          const width = chartContainer.clientWidth*1.3;
+          const height = width * 0.5*1.3; 
+          setChartDimensions({ width, height });
+        }
+        else{
+          const width = chartContainer.clientWidth;
+          const height = width * 0.5;
+          setChartDimensions({ width, height });
+        }
       }
     };
 
@@ -74,14 +83,14 @@ export default function PopulationChart({
                 data_all={data_all}
                 activeGraph={activeGraph}
                 colors={colors}
-                mediaWidth={chartDimensions.width * 1.3}
-                mediaHeight={chartDimensions.height * 1.3}
+                mediaWidth={chartDimensions.width}
+                mediaHeight={chartDimensions.height}
               />
             </div>
           ) : (
             <NoGraphSection
-              mediaWidth={chartDimensions.width * 1.3}
-              mediaHeight={chartDimensions.height * 1.3}
+              mediaWidth={chartDimensions.width}
+              mediaHeight={chartDimensions.height}
             />
           )}
         </div>
