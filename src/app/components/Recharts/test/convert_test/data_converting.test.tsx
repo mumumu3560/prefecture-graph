@@ -1,22 +1,17 @@
 import "@testing-library/jest-dom";
 
-import {data1, data2, data3, data4} from "./data";
-import {expected1, expected2, expected3, expected4} from "./expected";
+import { data1, data2, data3, data4 } from "./data";
+import { expected1, expected2, expected3, expected4 } from "./expected";
 
 import { convertPrefectureData } from "../../recharts_data_converting";
 
-
-
 describe("Rechartsコンポーネントのテスト", () => {
-
-  
   test("test2 data1が正しく変換されるか", () => {
     const result = convertPrefectureData(data1);
 
     expect(result).toEqual(expected1);
   });
 
-  
   test("test2 data2が正しく変換されるか", () => {
     const result = convertPrefectureData(data2);
 
@@ -34,7 +29,4 @@ describe("Rechartsコンポーネントのテスト", () => {
 
     expect(result).toEqual(expected4);
   });
-
-
-
 });

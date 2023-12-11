@@ -1,5 +1,5 @@
 "use client";
-import {usePrefStore} from '@/app/global/store';
+import { usePrefStore } from "@/app/global/store";
 
 interface CheckboxProps {
   receivedData: PopulationResult | null;
@@ -23,26 +23,16 @@ interface PopulationResult {
   data: PopulationCategory[];
 }
 
-const CookieSave: React.FC<CheckboxProps> = ({
-  receivedData,
-  prefData
-}) => {
-
-  
+const CookieSave: React.FC<CheckboxProps> = ({ receivedData, prefData }) => {
   const addPrefecture = usePrefStore((state) => state.addPrefPopulationData);
 
-  if(!receivedData || prefData === ""){
-  }
-  else{
-    const addingData:PopulationResult = receivedData!;
+  if (!receivedData || prefData === "") {
+  } else {
+    const addingData: PopulationResult = receivedData!;
     addPrefecture(addingData);
   }
 
-  return (
-    <div></div>
-  );
+  return <div></div>;
 };
 
 export default CookieSave;
-
-

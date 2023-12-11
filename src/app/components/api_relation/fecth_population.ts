@@ -1,4 +1,4 @@
-import 'server-only'
+import "server-only";
 import { env } from "@/env/server.mjs";
 
 interface PopulationData {
@@ -17,10 +17,11 @@ interface PopulationResult {
   data: PopulationCategory[];
 }
 
-
-const fetchPopulation = async (prefCode: number, prefName: string): Promise<PopulationResult | null> => {
-
-  if(isNaN(prefCode) || prefName == ""){
+const fetchPopulation = async (
+  prefCode: number,
+  prefName: string,
+): Promise<PopulationResult | null> => {
+  if (isNaN(prefCode) || prefName == "") {
     return null;
   }
   try {
@@ -29,7 +30,9 @@ const fetchPopulation = async (prefCode: number, prefName: string): Promise<Popu
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch population data for ${prefName}: ${response.statusText}`);
+      throw new Error(
+        `Failed to fetch population data for ${prefName}: ${response.statusText}`,
+      );
     }
 
     const result = await response.json();

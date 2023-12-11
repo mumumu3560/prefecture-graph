@@ -1,5 +1,3 @@
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,11 +7,9 @@
 html,
 body {
   color: rgb(var(--foreground-rgb));
+  /*スマホの場合、はみ出てもスクロールできるようにする*/
   overflow-x: scroll;
   @media (max-width: 600px) {
     font-size: 14px;
   }
-  
 }
-
-

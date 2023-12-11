@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, /*screen, */ fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import CheckBoxView from "../CheckBox_view";
 import React from "react";
 
@@ -9,61 +9,45 @@ import React from "react";
 
 beforeAll(() => {
   // Cookieの設定
-  Object.defineProperty(global.document, 'cookie', {
+  Object.defineProperty(global.document, "cookie", {
     writable: true,
     configurable: true,
-    value: '',         
+    value: "",
   });
 });
 
 afterEach(() => {
   // Cookieの値は都度初期化
-  Object.defineProperty(global.document, 'cookie', {
+  Object.defineProperty(global.document, "cookie", {
     writable: true,
     configurable: true,
-    value: '',
+    value: "",
   });
 });
 
-
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter() {
     return {
-      asPath: '/',
-      refresh: () => {return;},
+      asPath: "/",
+      refresh: () => {
+        return;
+      },
     };
   },
 }));
 
-
-/*
-const mockFunction = jest.fn();
-
-beforeAll(() => {
-  Object.defineProperty(document, 'cookie', {
-    get: mockFunction,
-  });
-});
-
-beforeEach(() => {
-  mockFunction.mockReturnValue('');
-});
-
-*/
-
-describe("Buttonコンポーネントのテスト", () => {
-  //test1 チェックボックスのラベルが正しく表示されているかこれはTokyoと表示されるか
-  test("test1 renders checkbox with correct label", () => {
+describe("CheckBoxコンポーネントテスト", () => {
+  test("test1 チェックボックスのラベルのテスト", () => {
     const { getByText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1} />,
     );
 
     const labelElement = getByText(/青森/i);
     expect(labelElement).toBeInTheDocument();
   });
 
-  //test2 チェックボックスにcookieDataが渡されたときにチェックボックスがチェックされているか
-  test("test2 handles checkbox change", () => {
+  //test2
+  test("test2 Cookieのデータが渡されたときにチェックされるか", () => {
     const { getByLabelText } = render(
       <CheckBoxView
         prefCode={2}
@@ -75,44 +59,37 @@ describe("Buttonコンポーネントのテスト", () => {
 
     const checkboxElement = getByLabelText(/青森/i);
     expect(checkboxElement).toBeChecked();
-
   });
 
-  //ここから下が成功しない
-  
-  //test3 チェックボックスのスタイルが正しく適用されているか(デフォルト)
-  test("test3 renders checkbox with default style", () => {
+  //test3
+  test("test3 チェックボックスのデフォルトスタイルのテスト", () => {
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1} />,
     );
     const checkboxElement = getByLabelText(/青森/i);
     expect(checkboxElement.parentNode).toHaveClass("checkboxContainer");
-    // デフォルトスタイルが適用されていることを確認
     expect(checkboxElement.parentNode).not.toHaveClass("checked");
   });
 
-  //test4 チェックボックスのスタイルが正しく適用されているか(チェックボックスクリック後)
-  test("test4 changes style on checkbox click", () => {
+  //test4
+  test("test4 クリック後のチェックボックスのスタイル", () => {
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1} />,
     );
 
     const checkboxLabel = getByLabelText(/青森/i);
 
-    // チェックボックスをクリックしてスタイルが変更されたことを確認
     fireEvent.click(checkboxLabel);
 
     expect(checkboxLabel.parentNode).toHaveClass("checked");
   });
 
   //test5 cookieのテスト
-  test("test5 changes style on checkbox click", () => {
-
+  //実際にはdocument.cookieには二回値が入っているがそれのテストがわからない
+  test("test5 Cookieテスト", () => {
     const { getByLabelText } = render(
-      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1}/>,
+      <CheckBoxView prefCode={1} prefName="青森" cookieData="" areaCode={1} />,
     );
-
-    
 
     const checkboxLabel = getByLabelText(/青森/i);
 
@@ -121,12 +98,9 @@ describe("Buttonコンポーネントのテスト", () => {
     fireEvent.click(checkboxLabel);
 
     expect(checkboxLabel).toBeChecked();
-    
+
     expect(document.cookie).toContain(`prefName=${encodeURIComponent("青森")}`);
 
     //expect(document.cookie).toContain(`prefCode=${encodeURIComponent(1)}`);
-
   });
-
-
 });
