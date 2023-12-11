@@ -9,11 +9,13 @@ interface PopulationData {
     data: PopulationData[];
   }
   
+  //これが変換元のデータ型
   interface PopulationResult {
     prefName: string;
     data: PopulationCategory[];
   }
   
+  //これはRechartsで使うデータ型
   type AllPrefecturesData = { year: number; [prefName: string]: number }[];
   
   type ResultType = {

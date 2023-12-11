@@ -28,6 +28,7 @@ export async function CookieGet(): Promise<PopulationResult | null> {
     const fetchPrefCode = decodeURIComponent(cookieStore.get("prefCode")?.value ?? "");
     const fetchPrefName = decodeURIComponent(cookieStore.get("prefName")?.value ?? "");
 
+
     if(fetchPrefCode == "" || fetchPrefName == ""){
         return null;
     }

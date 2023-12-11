@@ -117,11 +117,11 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({
   return (
     <div>
       <div className={styles.container}>{renderCheckboxByArea()}</div>
+      
       <CookieSave 
         receivedData={populationData} 
         prefData = {cookieData}
       >
-
       </CookieSave>
     </div>
 

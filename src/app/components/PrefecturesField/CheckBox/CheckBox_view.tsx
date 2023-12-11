@@ -45,6 +45,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       document.cookie = `prefCode=${encodeURIComponent(prefCode)}`;
       document.cookie = `prefName=${encodeURIComponent(prefName)}`;
 
+
       router.refresh();
     }
     
