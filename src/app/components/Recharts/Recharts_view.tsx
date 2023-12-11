@@ -1,7 +1,6 @@
 
 "use client";
 
-// PopulationChart.tsx
 import React, { useState } from 'react';
 import { usePrefStore } from '@/app/global/store';
 import { convertPrefectureData } from './recharts_data_converting';
@@ -11,6 +10,7 @@ import GraphInfoSection from './ChartComponents/GraphInfoSection';
 import ButtonsSection from './ChartComponents/ButtonSection';
 
 import styles from './Recharts.module.css';
+import { ResponsiveContainer } from 'recharts';
 
 export default function PopulationChart({ boundaryYear }: { boundaryYear: number }) {
   const prefPopulationData = usePrefStore((state) => state.prefPopulationData);
@@ -24,16 +24,19 @@ export default function PopulationChart({ boundaryYear }: { boundaryYear: number
   const shouldShowGraph = data_all[activeGraph] && data_all[activeGraph].length > 0;
 
   return (
-    <div>
-      <div className={styles.graph}>
-        <GraphInfoSection activeGraph={activeGraph} boundaryYear={boundaryYear} />
-        <ButtonsSection handleGraphChange={handleGraphChange} />
-        {shouldShowGraph ? (
-          <ChartSection data_all={data_all} activeGraph={activeGraph} colors={colors} />
-        ) : (
-          <NoGraphSection />
-        )}
+    <ResponsiveContainer width="90%" height="50%">
+      <div>
+        <div className={styles.graph}>
+          <GraphInfoSection activeGraph={activeGraph} boundaryYear={boundaryYear} />
+          <ButtonsSection handleGraphChange={handleGraphChange} />
+          {shouldShowGraph ? (
+            <ChartSection data_all={data_all} activeGraph={activeGraph} colors={colors} />
+          ) : (
+            <NoGraphSection />
+          )}
+
+        </div>
       </div>
-    </div>
+    </ResponsiveContainer>
   );
 }
