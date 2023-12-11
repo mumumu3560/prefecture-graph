@@ -8,10 +8,10 @@ interface ButtonsSectionProps {
 
 const ButtonsSection: React.FC<ButtonsSectionProps> = ({ handleGraphChange }) => (
   <div className={styles.buttons}>
-    <button onClick={() => handleGraphChange('総人口')}>総人口</button>
-    <button onClick={() => handleGraphChange('年少人口')}>年少人口</button>
-    <button onClick={() => handleGraphChange('生産年齢人口')}>生産年齢人口</button>
-    <button onClick={() => handleGraphChange('老年人口')}>老年人口</button>
+    <button className={styles.all} onClick={() => handleGraphChange('総人口')}>総人口</button>
+    <button className={styles.child} onClick={() => handleGraphChange('年少人口')}>年少人口</button>
+    <button className={styles.worker} onClick={() => handleGraphChange('生産年齢人口')}>生産年齢人口</button>
+    <button className={styles.old} onClick={() => handleGraphChange('老年人口')}>老年人口</button>
   </div>
 );
 
