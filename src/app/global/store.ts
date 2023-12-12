@@ -35,26 +35,19 @@ export const usePrefStore = create<prefState>()(
           const isPrefNameExist = state.prefPopulationData.some(
             (prefData) => prefData.prefName === data.prefName,
           );
-          console.log("state.prefPopulationData:", state.prefPopulationData);
 
           if (isPrefNameExist) {
-            console.log(
-              `Population data for ${data.prefName} already exists. Skipping addition.`,
-            );
             return { prefPopulationData: state.prefPopulationData };
           }
 
-          console.log("Adding population data:", data);
           return { prefPopulationData: [...state.prefPopulationData, data] };
         }),
 
       removePrefPopulationData: (prefName: string) =>
         set((state) => {
-          console.log("Before removal:", state.prefPopulationData);
           const newPrefPopulationData = state.prefPopulationData.filter(
             (pref) => pref.prefName !== prefName,
           );
-          console.log("After removal:", newPrefPopulationData);
           return { prefPopulationData: newPrefPopulationData };
         }),
     }),

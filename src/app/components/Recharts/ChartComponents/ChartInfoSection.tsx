@@ -1,13 +1,13 @@
-// GraphInfoSection.tsx
+// ChartInfoSection.tsx
 import React from "react";
 import styles from "../Recharts.module.css";
 
-interface GraphInfoSectionProps {
+interface ChartInfoSectionProps {
   activeGraph: string;
   boundaryYear: number;
 }
 
-const GraphInfoSection: React.FC<GraphInfoSectionProps> = ({
+const ChartInfoSection: React.FC<ChartInfoSectionProps> = ({
   activeGraph,
   boundaryYear,
 }) => (
@@ -38,4 +38,4 @@ const GraphInfoSection: React.FC<GraphInfoSectionProps> = ({
   </>
 );
 
-export default GraphInfoSection;
+export default ChartInfoSection;

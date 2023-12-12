@@ -579,3 +579,12 @@ https://zenn.dev/acha_n/articles/how-to-customize-recharts
 CSSのボタンのやつはこれがよさそう
 https://jajaaan.co.jp/css/button/
 
+画面サイズの取得
+https://zenn.dev/developanda/articles/daf34873fe4ef4
+
+Recharts_viewでは画面サイズを取得しているがこれがわかりづらくなっているので変更したほうがいい？
+よくわからない。
+
+
+CSVで文字化け
+https://zenn.dev/overflow_offers/articles/20220829-input-csv-parse-json
