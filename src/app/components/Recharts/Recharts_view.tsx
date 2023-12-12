@@ -22,19 +22,30 @@ export default function PopulationChart({
     height: 400,
   });
 
+  //ここは画面サイズの取得のみに使う。
+  //Chartが表示されているときといないときの処理が入っている。
+  //TODO ここがわかりづらい
   useEffect(() => {
     const handleResize = () => {
       const chartContainer = document.getElementById("chart-container");
-      if (chartContainer) {
+      const noChartContainer = document.getElementById("no-chart-container");
 
-        //画面の大きさによってグラフの大きさを変更
-        if(chartContainer.clientWidth < 500){
-          const width = chartContainer.clientWidth*1.3;
-          const height = width * 0.5*1.3; 
-          setChartDimensions({ width, height });
+      if (chartContainer || noChartContainer) {
+        let nowContainer;
+        if (chartContainer) {
+          nowContainer = chartContainer;
+        } else if (noChartContainer) {
+          nowContainer = noChartContainer;
+        } else {
+          return;
         }
-        else{
-          const width = chartContainer.clientWidth;
+        //画面の大きさによってグラフの大きさを変更
+        if (nowContainer.clientWidth < 500) {
+          const width = nowContainer.clientWidth * 1.3;
+          const height = width * 0.5 * 1.3;
+          setChartDimensions({ width, height });
+        } else {
+          const width = nowContainer.clientWidth;
           const height = width * 0.5;
           setChartDimensions({ width, height });
         }
@@ -78,6 +89,7 @@ export default function PopulationChart({
           />
           <ButtonsSection handleGraphChange={handleGraphChange} />
           {shouldShowGraph ? (
+            //ここのidはここでしか使わない。画面サイズの取得のみに使う。
             <div id="chart-container" style={{ width: "100%", height: "100%" }}>
               <ChartSection
                 data_all={data_all}
@@ -88,10 +100,13 @@ export default function PopulationChart({
               />
             </div>
           ) : (
-            <NoChartSection
-              mediaWidth={chartDimensions.width}
-              mediaHeight={chartDimensions.height}
-            />
+            //ここのidはここでしか使わない。画面サイズの取得のみに使う。
+            <div id="no-chart-container">
+              <NoChartSection
+                mediaWidth={chartDimensions.width}
+                mediaHeight={chartDimensions.height}
+              />
+            </div>
           )}
         </div>
       </div>

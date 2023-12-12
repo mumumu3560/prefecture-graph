@@ -23,16 +23,13 @@ interface ExportButtonProps {
 }
 
 const ExportButton: React.FC<ExportButtonProps> = ({ data }) => {
-
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [selectedPref, setSelectedPref] = useState<string>("");
   const [downloadData, setDownloadData] = useState<PopulationCategory[]>([]);
 
-
   const openPopover = () => {
     setIsPopoverOpen(true);
   };
-
 
   const closePopover = () => {
     setIsPopoverOpen(false);
@@ -41,7 +38,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({ data }) => {
   const handlePrefSelect = (prefName: string) => {
     setSelectedPref(prefName);
     setDownloadData(
-      data.find((item) => item.prefName === prefName)?.data || []
+      data.find((item) => item.prefName === prefName)?.data || [],
     );
     closePopover();
   };
@@ -57,7 +54,7 @@ const ExportButton: React.FC<ExportButtonProps> = ({ data }) => {
             dataItem.year,
             dataItem.value,
             dataItem.rate || "",
-          ])
+          ]),
         ),
       });
 

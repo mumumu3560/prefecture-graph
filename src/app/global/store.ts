@@ -37,7 +37,6 @@ export const usePrefStore = create<prefState>()(
           );
 
           if (isPrefNameExist) {
-
             return { prefPopulationData: state.prefPopulationData };
           }
 
