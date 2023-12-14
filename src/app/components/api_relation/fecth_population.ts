@@ -2,23 +2,6 @@ import "server-only";
 import { env } from "@/env/server.mjs";
 import { PopulationData, PopulationCategory, PopulationResult } from "@/app/types/types";
 
-/*
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
-
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
-}
-*/
 
 const fetchPopulation = async (
   prefCode: number,
