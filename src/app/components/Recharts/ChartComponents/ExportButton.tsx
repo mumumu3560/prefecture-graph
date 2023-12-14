@@ -1,22 +1,7 @@
 import React, { useState } from "react";
 import Papa from "papaparse";
 import Encoding from "encoding-japanese";
-
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
-
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
-}
+import { PopulationCategory, PopulationResult } from "@/app/types/types";
 
 interface ExportButtonProps {
   data: PopulationResult[];

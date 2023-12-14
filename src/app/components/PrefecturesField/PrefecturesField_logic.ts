@@ -1,24 +1,11 @@
 import { cookies } from "next/headers";
 import { fetchPopulation } from "@/app/components/api_relation/fecth_population";
+import { PopulationResult } from "@/app/types/types";
+
 
 export const runtime = "edge";
 
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
 
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-//boundaryYearは2020でこれ以上は推定値
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
-}
 
 export async function CookieGet(): Promise<PopulationResult | null> {
   const cookieStore = cookies();

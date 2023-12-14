@@ -1,19 +1,4 @@
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
-
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-//これが変換元のデータ型
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
-}
+import { PopulationResult } from "@/app/types/types";
 
 //これはRechartsで使うデータ型
 type AllPrefecturesData = { year: number; [prefName: string]: number }[];

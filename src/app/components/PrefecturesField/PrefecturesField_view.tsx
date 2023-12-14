@@ -5,6 +5,7 @@ import { CookieGet } from "./PrefecturesField_logic";
 import CookieSave from "./CheckBox/CookieSave";
 
 import { cookies } from "next/headers";
+import { PopulationResult } from "@/app/types/types";
 
 //export const runtime = 'edge';
 
@@ -17,23 +18,6 @@ interface Prefecture {
 //都道府県とチェックボックスの関連付け
 interface CheckboxListProps {
   prefectures: Prefecture[];
-}
-
-interface PopulationData {
-  year: number;
-  value: number;
-  rate?: number;
-}
-
-interface PopulationCategory {
-  label: string;
-  data: PopulationData[];
-}
-
-//boundaryYearは2020でこれ以上は推定値
-interface PopulationResult {
-  prefName: string;
-  data: PopulationCategory[];
 }
 
 const CheckBoxList: React.FC<CheckboxListProps> = async ({ prefectures }) => {
