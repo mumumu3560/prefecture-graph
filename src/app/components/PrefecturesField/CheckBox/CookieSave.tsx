@@ -4,14 +4,14 @@ import { PopulationResult } from "@/app/types/types";
 
 interface CheckboxProps {
   receivedData: PopulationResult | null;
-  prefData: string;
+  //prefData: string;
 }
 
 
-const CookieSave: React.FC<CheckboxProps> = ({ receivedData, prefData }) => {
+const CookieSave: React.FC<CheckboxProps> = ({ receivedData }) => {
   const addPrefecture = usePrefStore((state) => state.addPrefPopulationData);
 
-  if (!receivedData || prefData === "") {
+  if (!receivedData) {
   } else {
     const addingData: PopulationResult = receivedData!;
     addPrefecture(addingData);

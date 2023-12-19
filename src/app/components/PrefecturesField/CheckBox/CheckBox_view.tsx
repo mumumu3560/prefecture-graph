@@ -3,8 +3,9 @@
 import React, { useState } from "react";
 import styles from "./CheckBox.module.css";
 import { usePrefStore } from "@/app/global/store";
-//import {usePrefStore} from '../../../../app/global/store';
 import { useRouter } from "next/navigation";
+
+import { useEffect } from "react";
 
 interface CheckboxProps {
   prefCode: number;
@@ -22,9 +23,25 @@ const Checkbox: React.FC<CheckboxProps> = ({
   cookieData,
   areaCode,
 }) => {
+
+  /*
+  //ハイドレーションを意識する。useEffectでここを変えてみる
   const [isChecked, setIsChecked] = useState(
     cookieData === prefName ? true : false,
   );
+  */
+
+  const [isChecked, setIsChecked] = useState(false);
+  const [cookie, setCookie] = useState("");
+
+  useEffect(() => {
+    // このuseEffectはクライアント側でのみ実行されます
+    // ここでクッキーを読み取る
+
+    setCookie(cookieData);
+
+    setIsChecked(cookie === prefName ? true : false);
+  }, []); // 空の依存性配列は、初回のレンダリング後にクライアントでのみ一度だけ実行されることを保証します
 
   const removePrefecture = usePrefStore(
     (state) => state.removePrefPopulationData,
