@@ -24,3 +24,10 @@
   font-size: 18px; /* タイトルのフォントサイズを指定 */
   margin-bottom: 5px; /* タイトルの下に余白を追加 */
 }
+
+
+/* styles.module.css などで定義されたスタイルに以下を追加 */
+.areaSection.scrollable {
+  overflow-x: auto;
+  white-space: nowrap; /* 必要に応じて、横スクロールしたときに改行しないようにする */
+}

@@ -17,4 +17,8 @@
 .subtitle {
   /*見出しは左に寄せたい*/
   text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+
 }

@@ -49,7 +49,7 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({ prefectures }) => {
   //indexは地域のインデックス
   const renderCheckboxByArea = () => {
     return areaName.map((area: string, index: number) => (
-      <div key={index} className={styles.areaSection}>
+      <div key={index} className={`${styles.areaSection} ${styles.scrollable}`}>
         <h4 className={styles.areaNameBox}>{area}</h4>
         {renderCheckboxesForArea(index)}
       </div>
@@ -84,6 +84,7 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({ prefectures }) => {
         cookieData={cookieData}
         areaCode={areaIndex}
       />
+      
     ));
   };
 
@@ -93,7 +94,6 @@ const CheckBoxList: React.FC<CheckboxListProps> = async ({ prefectures }) => {
 
       <CookieSave
         receivedData={populationData}
-        prefData={cookieData}
       ></CookieSave>
     </div>
   );

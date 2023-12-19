@@ -19,20 +19,26 @@ export default async function Home() {
   const prefectures: Prefecture[] = await fetchPrefectures();
   const boundaryYear: number = await fetchBoundaryYear();
 
+  /*<section>
+        <h2 className={styles.subtitle}>人口情報チャート</h2>
+        <Chart boundaryYear={boundaryYear} />
+      </section> */
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>都道府県別人口推移グラフ</h1>
       <div>※スマホは横向き推奨</div>
 
       <section>
-        <h2 className={styles.subtile}>都道府県一覧</h2>
+        <h2 className={styles.subtitle}>都道府県一覧</h2>
         <PrefecturesField key={"aa"} prefectures={prefectures} />
       </section>
 
       <section>
         <h2 className={styles.subtitle}>人口情報チャート</h2>
         <Chart boundaryYear={boundaryYear} />
-      </section>
+      </section> 
+      
 
       <div></div>
     </main>
