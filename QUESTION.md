@@ -21,3 +21,8 @@ https://github.com/mumumu3560/prefecture-graph/actions/runs/7098053551/job/19319
 これでexitする。これはCloudflare Pagesでも見られたエラーでt3周りでenvが無いことに起因している？
 githubの方でenvを設定する？
 
+App Routerでの状態管理？
+
+HighChartsがうまく使えない。
+https://www.highcharts.com/forum/viewtopic.php?t=51764
+Githubでどういったことが言われているかがわからない。

@@ -1,0 +1,33 @@
+/* これは全体の外側のコンテナに適用されるスタイル */
+.container {
+  /* #ccc枠線のスタイルと色を指定 border: 2px solid gray;*/
+  padding: 10px; /* 必要に応じてパディングを追加 */
+  margin: 20px; /* 必要に応じてマージンを追加 */
+}
+
+/* 各地域のセクションに適用されるスタイル */
+.areaSection {
+  border-bottom: 2px solid #aaa; /* 各地域のセクションの下部に横線を追加 */
+  margin-bottom: 10px; /* 各セクションの下に余白を追加 */
+  display: flex; /* 各セクションを横並びにする */
+}
+
+/*地域の名前に対して適用されるスタイル*/
+.areaNameBox {
+  width: 120px; /* 地域名のボックスの幅を指定 */
+  text-align: center; /* 地域名を中央寄せにする */
+  padding: 10px; /* 必要に応じてパディングを追加 */
+}
+
+/* タイトル（地域名）に適用されるスタイル */
+.areaTitle {
+  font-size: 18px; /* タイトルのフォントサイズを指定 */
+  margin-bottom: 5px; /* タイトルの下に余白を追加 */
+}
+
+
+/* styles.module.css などで定義されたスタイルに以下を追加 */
+.areaSection.scrollable {
+  overflow-x: auto;
+  white-space: nowrap; /* 必要に応じて、横スクロールしたときに改行しないようにする */
+}

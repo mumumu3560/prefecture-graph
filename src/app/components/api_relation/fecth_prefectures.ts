@@ -1,43 +1,39 @@
-import axios from "axios";
+import "server-only";
 import { env } from "@/env/server.mjs";
 
 //RESAS APIのデータ元
 //https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
+interface Prefecture {
+  prefCode: number;
+  prefName: string;
+}
 
-const fetchPrefectures = async () => {
+const fetchPrefectures = async (): Promise<Prefecture[]> => {
   try {
-    const results = await axios.get<{
-      message: null;
-      result: { prefCode: number; prefName: string }[];
-    }>(env.PREFECTURES_API_URL, {
+    const response = await fetch(env.PREFECTURES_API_URL, {
       headers: { "X-API-KEY": env.API_KEY },
     });
 
-    const formattedData = results.data.result.map(
+    if (!response.ok) {
+      throw new Error(`Failed to fetch prefectures: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    const formattedData: Prefecture[] = result.result.map(
       (prefecture: { prefCode: number; prefName: string }) => ({
         prefCode: prefecture.prefCode,
         prefName: prefecture.prefName,
       }),
     );
 
-    //console.log("ここは前");
-    //console.log("Prefectures:", formattedData);
-    //console.log("ここは後");
-
     return formattedData;
   } catch (error) {
-    console.error("Error fetching prefectures:", error);
-    throw error; // You can choose to handle or rethrow the error
+    throw error;
   }
 };
 
 export { fetchPrefectures };
-
-/*
-server componentsでapi取得 
-NEXT_PUBLIC_をつけることで、クライアントサイドからも参照可能になるが今回はセキュリティを考慮してサーバーサイドのみで参照する
-また型定義も必要↓
-*/
 
 /*
 参考サイト

@@ -1,29 +1,46 @@
+import React from "react";
 import styles from "./page.module.css";
+
 import { fetchPrefectures } from "./components/api_relation/fecth_prefectures";
-//import CheckBoxView from "./components/PrefecturesField/CheckBoxList/CheckBox/CheckBox_view";
-import CheckBoxListView from "./components/PrefecturesField/CheckBoxList/CheckBoxList_view";
+
+import PrefecturesField from "./components/PrefecturesField/PrefecturesField_view";
+import Chart from "./components/Recharts/Recharts_view";
+import { fetchBoundaryYear } from "./components/api_relation/fetch_boundary_year";
+
+export const runtime = "edge";
 
 interface Prefecture {
   prefCode: number;
   prefName: string;
 }
 
-// awaitを使うにはasyncをつける必要がある
 //https://zenn.dev/tfutada/articles/36ad71ab598019
 export default async function Home() {
   const prefectures: Prefecture[] = await fetchPrefectures();
+  const boundaryYear: number = await fetchBoundaryYear();
 
-  const addedPrefectures: number[] = [];
-
-  console.log("Prefectures:", prefectures);
+  /*<section>
+        <h2 className={styles.subtitle}>人口情報チャート</h2>
+        <Chart boundaryYear={boundaryYear} />
+      </section> */
 
   return (
     <main className={styles.main}>
-      <CheckBoxListView
-        key={1}
-        prefectures={prefectures}
-        selectedPrefectures={addedPrefectures}
-      />
+      <h1 className={styles.title}>都道府県別人口推移グラフ</h1>
+      <div>※スマホは横向き推奨</div>
+
+      <section>
+        <h2 className={styles.subtitle}>都道府県一覧</h2>
+        <PrefecturesField key={"aa"} prefectures={prefectures} />
+      </section>
+
+      <section>
+        <h2 className={styles.subtitle}>人口情報チャート</h2>
+        <Chart boundaryYear={boundaryYear} />
+      </section> 
+      
+
+      <div></div>
     </main>
   );
 }
