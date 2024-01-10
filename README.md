@@ -1,6 +1,6 @@
 # 目的
 以下のサイトの条件に合ったSPAの作成    
-https://yumemi.notion.site/0e9ef27b55704d7882aab55cc86c999d
+https://yumemi.notion.site/0e9ef27b55704d7882aab55cc86c999d    
 Cloudflare Pagesにデプロイした      
 https://d79b8667.prefecture-graph.pages.dev/
 
